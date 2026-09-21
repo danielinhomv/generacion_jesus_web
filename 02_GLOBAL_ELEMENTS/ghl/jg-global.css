@@ -1,0 +1,244 @@
+/* GHL field: Custom CSS — paste entire file */
+.jg-header,
+.jg-footer {
+  --jg-royal-blue: #0D47A1;
+  --jg-sky-blue: #1E88E5;
+  --jg-deep-navy: #0A1E3D;
+  --jg-white: #FFFFFF;
+  --jg-action-red: #E53935;
+  --jg-charcoal: #2B2D31;
+  --jg-medium-gray: #7A7D85;
+  --jg-light-gray: #F0F2F5;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--jg-charcoal);
+}
+
+.jg-header *,
+.jg-footer * {
+  box-sizing: border-box;
+}
+
+.jg-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: var(--jg-white);
+  border-bottom: 1px solid var(--jg-light-gray);
+}
+
+.jg-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  min-height: 64px;
+  padding: 0.5rem 1rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.jg-header__logo {
+  display: flex;
+  flex: 0 0 auto;
+  max-height: 48px;
+}
+
+.jg-header__logo img {
+  max-height: 48px;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+.jg-header__phrase {
+  display: none;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--jg-deep-navy);
+  white-space: nowrap;
+}
+
+.jg-header__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  order: 5;
+  min-width: 44px;
+  min-height: 44px;
+  margin-left: auto;
+  border: 1px solid var(--jg-deep-navy);
+  background: var(--jg-white);
+  color: var(--jg-deep-navy);
+  cursor: pointer;
+}
+
+.jg-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+  order: 6;
+}
+
+.jg-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--jg-deep-navy);
+}
+
+.jg-lang a {
+  color: var(--jg-royal-blue);
+  text-decoration: none;
+}
+
+.jg-lang a[aria-current="page"] {
+  color: var(--jg-deep-navy);
+  text-decoration: underline;
+}
+
+.jg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 1rem;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: 2px;
+}
+
+.jg-btn-get-involved {
+  background: var(--jg-royal-blue) !important;
+  color: var(--jg-white) !important;
+  border: 2px solid var(--jg-royal-blue) !important;
+}
+
+.jg-btn-give {
+  background: var(--jg-action-red) !important;
+  color: var(--jg-white) !important;
+  border: 2px solid var(--jg-action-red) !important;
+}
+
+.jg-nav {
+  display: none;
+  flex-direction: column;
+  order: 10;
+  width: 100%;
+  padding: 0 0 0.5rem;
+  background: var(--jg-white);
+}
+
+.jg-header.is-open .jg-nav {
+  display: flex;
+}
+
+.jg-nav a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: var(--jg-deep-navy);
+  text-decoration: none;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+}
+
+.jg-footer {
+  background: var(--jg-deep-navy);
+  color: var(--jg-white);
+  padding: 2rem 1rem;
+}
+
+.jg-footer a {
+  color: var(--jg-sky-blue);
+}
+
+.jg-footer__logo img {
+  max-height: 48px;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.jg-footer__phrase {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.jg-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.jg-footer__grid h3 {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+}
+
+.jg-footer__grid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.jg-footer__grid li {
+  margin: 0.35rem 0;
+}
+
+.jg-footer__legal-note {
+  color: var(--jg-medium-gray);
+  font-size: 0.85rem;
+}
+
+.jg-footer__newsletter {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .jg-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1025px) {
+  .jg-header__toggle {
+    display: none;
+  }
+
+  .jg-header__phrase {
+    display: block;
+  }
+
+  .jg-nav {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    width: auto;
+    order: 3;
+    padding: 0;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .jg-header__actions {
+    order: 4;
+    margin-left: 0;
+  }
+
+  .jg-footer__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
