@@ -97,6 +97,13 @@
         closeDropdowns(header);
       });
     });
+
+    /* close action-dropdowns when their links are clicked */
+    qsa(".jg-dropdown--action a", header).forEach(function (link) {
+      link.addEventListener("click", function () {
+        closeDropdowns(header);
+      });
+    });
   }
 
   /* ─────────────────────────────────────────────────────────────────────────
@@ -166,6 +173,39 @@
   function stampYear() {
     qsa("[data-jg-year]").forEach(function (el) {
       el.textContent = new Date().getFullYear();
+    });
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     CHANNEL CARDS  — click scrolls to form and pre-selects the category
+  ───────────────────────────────────────────────────────────────────────── */
+  function bindChannelCards() {
+    var select = qs("[data-jg-category]");
+    var form   = qs("[data-jg-form]");
+    if (!select || !form) return;
+
+    qsa("[data-select-category]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var val = btn.getAttribute("data-select-category");
+
+        /* pre-select the matching option */
+        select.value = val;
+
+        /* trigger change so live-validation clears any existing error */
+        select.dispatchEvent(new Event("change"));
+
+        /* smooth-scroll to the form, offset for sticky header */
+        var header = qs("[data-jg-header]");
+        var offset = header ? header.offsetHeight + 16 : 16;
+        var top    = form.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: "smooth" });
+
+        /* focus the first visible input field after scroll settles */
+        setTimeout(function () {
+          var firstInput = qs("input, textarea, select", form);
+          if (firstInput) firstInput.focus({ preventScroll: true });
+        }, 420);
+      });
     });
   }
 
@@ -327,6 +367,7 @@
     qsa("[data-jg-header]").forEach(bindHeader);
     bindGlobal();
     stampYear();
+    bindChannelCards();
     bindContactForm();
   }
 

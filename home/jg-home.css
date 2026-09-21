@@ -278,14 +278,13 @@ a {
   top: 6px;
 }
 
-.jg-header__actions .jg-btn--navy,
 .jg-btn--bar,
 .jg-nav__cta-mobile {
   display: none;
 }
 
 .jg-hero {
-  padding: 1.5rem 0 0;
+  padding: 1.5rem 0 3.5rem;
 }
 
 .jg-hero__grid {
@@ -582,16 +581,19 @@ a {
 .jg-mission-strip {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 0;
-  height: 260px;
+  gap: 0.5rem;
+  height: 380px;
   overflow: hidden;
+  padding: 0 0 2.5rem;
 }
 
 .jg-mission-strip img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   display: block;
+  border-radius: 8px;
 }
 
 .jg-story-card__body,
@@ -638,8 +640,9 @@ a {
 
 .jg-countries img {
   width: 100%;
-  height: 140px;
+  height: 200px;
   object-fit: cover;
+  object-position: center top;
 }
 
 .jg-countries div {
@@ -657,6 +660,7 @@ a {
   display: grid;
   align-items: center;
   color: var(--jg-white);
+  margin-bottom: 2.5rem;
 }
 
 .jg-final > img {
@@ -871,7 +875,6 @@ a {
     display: none;
   }
 
-  .jg-header__actions .jg-btn--navy,
   .jg-btn--bar {
     display: inline-flex;
   }
@@ -961,6 +964,10 @@ a {
     grid-template-columns: repeat(4, 1fr);
   }
 
+  .jg-countries img {
+    height: 220px;
+  }
+
   .jg-footer__inner {
     grid-template-columns: 1.4fr 0.8fr 0.9fr 0.8fr 1.3fr;
   }
@@ -979,4 +986,48 @@ a {
     border-top: 1px solid var(--jg-light-gray);
     margin-top: 0.35rem;
   }
+}
+
+/* ══ Action Dropdown Buttons (GET INVOLVED / GIVE in header) ══ */
+.jg-action-dropdown {
+  position: relative;
+  flex: 0 0 auto;
+}
+.jg-action-dropdown .jg-btn--navy.jg-btn--action-dd {
+  font-size: 0.78rem !important;
+  padding: 0.7rem 1.3rem !important;
+  min-height: 48px !important;
+  letter-spacing: 0.06em !important;
+  box-shadow: 0 3px 10px rgba(13, 71, 161, 0.35) !important;
+}
+.jg-action-dropdown .jg-btn--give.jg-btn--action-dd {
+  font-size: 0.72rem !important;
+  padding: 0.6rem 1rem !important;
+  min-height: 42px !important;
+  letter-spacing: 0.04em !important;
+}
+.jg-caret--light {
+  width: 0; height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid rgba(255,255,255,0.85);
+  flex-shrink: 0;
+  margin-left: 0.2rem;
+}
+.jg-action-dropdown .jg-dropdown--action {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: auto;
+  min-width: 230px;
+  max-width: min(270px, 90vw);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(10,30,61,0.18);
+  padding: 0.65rem 0.45rem;
+  z-index: 3100;
+}
+.jg-action-dropdown.is-open .jg-dropdown--action {
+  display: block;
 }

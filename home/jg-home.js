@@ -56,6 +56,13 @@
       });
     });
 
+    /* close action-dropdowns when their links are clicked */
+    qsa(".jg-dropdown--action a", header).forEach(function (link) {
+      link.addEventListener("click", function () {
+        closeDropdowns(header);
+      });
+    });
+
     document.addEventListener("click", function (event) {
       if (!header.contains(event.target)) {
         closeDropdowns(header);

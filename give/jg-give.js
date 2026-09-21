@@ -80,6 +80,13 @@
         closeDropdowns(header);
       });
     });
+
+    /* close action-dropdowns when their links are clicked */
+    qsa('.jg-dropdown--action a', header).forEach(function (link) {
+      link.addEventListener('click', function () {
+        closeDropdowns(header);
+      });
+    });
   }
 
   /* ── Global listeners (bound once) ── */
