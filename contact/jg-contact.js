@@ -1,28 +1,15 @@
-/* Jesus Generation — Contact page JS
-   Matches the pattern from jg-about.js:
-   - IIFE, "use strict", no dependencies
-   - Header: sticky detection, mobile toggle, dropdown, keyboard/outside-click close
-   - Smooth-scroll for anchor links
-   - Footer: dynamic copyright year
-   - Contact form: client-side validation + preview submission handler
-     (In GHL, replace the <form> block with a native Form/Survey widget;
-      this script's form logic is for local browser preview only.)
-*/
 (function () {
   "use strict";
 
-  /* ─── constants ─────────────────────────────────────────────────────────── */
   var DESKTOP = 1025;
-  var bound   = false;
 
-  /* ─── tiny DOM helpers ───────────────────────────────────────────────────── */
   function qs(sel, root)  { return (root || document).querySelector(sel); }
   function qsa(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
   function isDesktop()    { return window.matchMedia("(min-width: " + DESKTOP + "px)").matches; }
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     HEADER
-  ───────────────────────────────────────────────────────────────────────── */
+  /* ══════════════════════════════════════════
+     HEADER — Hamburger + Fullscreen Mobile Menu + Dropdowns
+  ══════════════════════════════════════════ */
   function closeDropdowns(header) {
     qsa("[data-dropdown]", header).forEach(function (item) {
       item.classList.remove("is-open");
@@ -31,51 +18,34 @@
     });
   }
 
-  /** Detect whether a GHL parent container breaks position:sticky and
-   *  fall back to position:fixed when necessary. */
-  function parentBreaksSticky(el) {
-    var parent = el.parentElement;
-    while (parent && parent !== document.documentElement) {
-      var style = window.getComputedStyle(parent);
-      if (/(auto|scroll|hidden)/.test(style.overflowY) || style.overflow === "hidden") {
-        return true;
-      }
-      parent = parent.parentElement;
-    }
-    return false;
-  }
-
-  function hardenHeader(header) {
-    var page = header.closest(".jg-page") || document.body;
-    if (parentBreaksSticky(header)) {
-      header.classList.add("is-fixed");
-      page.classList.add("is-header-fixed");
-      page.style.setProperty("--jg-header", header.offsetHeight + "px");
-    } else {
-      header.classList.remove("is-fixed");
-      page.classList.remove("is-header-fixed");
-    }
-  }
-
   function bindHeader(header) {
-    if (header.getAttribute("data-jg-ready") === "true") return;
-    header.setAttribute("data-jg-ready", "true");
-
     var menuToggle = qs("[data-jg-menu-toggle]", header);
-    hardenHeader(header);
+    var menuClose  = qs("[data-jg-menu-close]", header);
 
-    /* ── mobile hamburger ── */
+    /* Abrir menú móvil estilo NSCA */
     if (menuToggle) {
       menuToggle.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
         var open = header.classList.toggle("is-open");
         menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        document.body.style.overflow = open && !isDesktop() ? "hidden" : "";
         if (!open) closeDropdowns(header);
       });
     }
 
-    /* ── dropdown toggles ── */
+    /* Botón X para cerrar en móvil */
+    if (menuClose) {
+      menuClose.addEventListener("click", function (e) {
+        e.preventDefault();
+        header.classList.remove("is-open");
+        document.body.style.overflow = "";
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+        closeDropdowns(header);
+      });
+    }
+
+    /* Manejo de Dropdowns de navegación y botones de acción */
     qsa("[data-dropdown]", header).forEach(function (item) {
       var toggle = qs("[data-dropdown-toggle]", item);
       if (!toggle) return;
@@ -89,96 +59,81 @@
       });
     });
 
-    /* ── close menu when a dropdown link is clicked ── */
-    qsa(".jg-dropdown a", header).forEach(function (link) {
+    /* Cerrar el overlay al hacer clic en cualquier enlace interno */
+    qsa(".jg-nav a:not([data-dropdown-toggle])", header).forEach(function (link) {
       link.addEventListener("click", function () {
         header.classList.remove("is-open");
+        document.body.style.overflow = "";
         if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
         closeDropdowns(header);
       });
     });
 
-    /* close action-dropdowns when their links are clicked */
-    qsa(".jg-dropdown--action a", header).forEach(function (link) {
-      link.addEventListener("click", function () {
+    /* Tecla Escape cierra el menú */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
         closeDropdowns(header);
-      });
+        header.classList.remove("is-open");
+        document.body.style.overflow = "";
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    /* Clic fuera del header cierra dropdowns */
+    document.addEventListener("click", function (e) {
+      if (!header.contains(e.target)) closeDropdowns(header);
+    });
+
+    /* Reset en cambio de tamaño a escritorio */
+    window.addEventListener("resize", function () {
+      if (isDesktop()) {
+        header.classList.remove("is-open");
+        document.body.style.overflow = "";
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+      }
     });
   }
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     GLOBAL EVENT LISTENERS  (bound once)
-  ───────────────────────────────────────────────────────────────────────── */
-  function bindGlobal() {
-    if (bound) return;
-    bound = true;
-
-    /* close dropdowns when clicking outside header */
-    document.addEventListener("click", function (e) {
-      qsa("[data-jg-header]").forEach(function (header) {
-        if (!header.contains(e.target)) closeDropdowns(header);
-      });
-    });
-
-    /* Escape key closes dropdowns / mobile menu */
-    document.addEventListener("keydown", function (e) {
-      if (e.key !== "Escape") return;
-      qsa("[data-jg-header]").forEach(function (header) {
-        closeDropdowns(header);
-        header.classList.remove("is-open");
-        var toggle = qs("[data-jg-menu-toggle]", header);
-        if (toggle) toggle.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    /* resize: re-evaluate sticky fallback + collapse mobile menu */
-    window.addEventListener("resize", function () {
-      qsa("[data-jg-header]").forEach(function (header) {
-        hardenHeader(header);
-        if (isDesktop()) {
-          header.classList.remove("is-open");
-          var toggle = qs("[data-jg-menu-toggle]", header);
-          if (toggle) toggle.setAttribute("aria-expanded", "false");
-        }
-      });
-    });
-
-    /* scroll: add .is-scrolled class for drop-shadow enhancement */
+  function bindScroll() {
+    var header = qs("[data-jg-header]");
+    if (!header) return;
     window.addEventListener(
       "scroll",
       function () {
-        qsa("[data-jg-header]").forEach(function (header) {
-          header.classList.toggle("is-scrolled", window.scrollY > 8);
-        });
+        header.classList.toggle("is-scrolled", window.scrollY > 8);
       },
       { passive: true }
     );
+  }
 
-    /* smooth-scroll for in-page anchor links */
+  /* ══════════════════════════════════════════
+     SMOOTH SCROLL
+  ══════════════════════════════════════════ */
+  function bindSmoothScroll() {
+    var header = qs("[data-jg-header]");
+
     document.addEventListener("click", function (e) {
       var link = e.target.closest('a[href^="#"]');
       if (!link) return;
-      var id = link.getAttribute("href");
-      if (!id || id === "#" || id === "#es") return;
-      var target = qs(id);
+
+      var hash = link.getAttribute("href");
+      if (!hash || hash === "#" || hash === "#es") return;
+
+      var target = qs(hash);
       if (!target) return;
+
       e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      var offset = header ? header.offsetHeight + 12 : 12;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      window.scrollTo({ top: top, behavior: "smooth" });
     });
   }
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     FOOTER YEAR
-  ───────────────────────────────────────────────────────────────────────── */
-  function stampYear() {
-    qsa("[data-jg-year]").forEach(function (el) {
-      el.textContent = new Date().getFullYear();
-    });
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     CHANNEL CARDS  — click scrolls to form and pre-selects the category
-  ───────────────────────────────────────────────────────────────────────── */
+  /* ══════════════════════════════════════════
+     CHANNEL CARDS
+  ══════════════════════════════════════════ */
   function bindChannelCards() {
     var select = qs("[data-jg-category]");
     var form   = qs("[data-jg-form]");
@@ -188,19 +143,14 @@
       btn.addEventListener("click", function () {
         var val = btn.getAttribute("data-select-category");
 
-        /* pre-select the matching option */
         select.value = val;
-
-        /* trigger change so live-validation clears any existing error */
         select.dispatchEvent(new Event("change"));
 
-        /* smooth-scroll to the form, offset for sticky header */
         var header = qs("[data-jg-header]");
         var offset = header ? header.offsetHeight + 16 : 16;
         var top    = form.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({ top: top, behavior: "smooth" });
 
-        /* focus the first visible input field after scroll settles */
         setTimeout(function () {
           var firstInput = qs("input, textarea, select", form);
           if (firstInput) firstInput.focus({ preventScroll: true });
@@ -209,18 +159,9 @@
     });
   }
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     CONTACT FORM  (preview / local browser only)
-     In GHL: remove this entire block and replace the <form> with a
-     native GHL Form/Survey widget.  Routing tags per Build Sheet:
-       - Academy Question   → tag JG-Academy
-       - Mission Trip       → tag JG-Mission-Trip
-       - Giving/Donor       → tag JG-Donor
-       - Prayer Request     → redirect /contact/prayer
-       - Media/Speaking     → redirect /contact/media-speaking
-  ───────────────────────────────────────────────────────────────────────── */
-
-  /* Inline error helpers */
+  /* ══════════════════════════════════════════
+     CONTACT FORM
+  ══════════════════════════════════════════ */
   function setError(input, errId, message) {
     var err = qs("#" + errId);
     input.classList.add("is-error");
@@ -250,48 +191,61 @@
     var category  = qs("#f-category",   form);
     var message   = qs("#f-message",    form);
 
-    /* First name */
+    var es = document.documentElement.lang === "es";
+
     if (!firstName.value.trim()) {
-      setError(firstName, "err-first-name", "First name is required.");
+      setError(firstName, "err-first-name", es ? "El nombre es obligatorio." : "First name is required.");
       valid = false;
     } else {
       clearError(firstName, "err-first-name");
     }
 
-    /* Last name */
     if (!lastName.value.trim()) {
-      setError(lastName, "err-last-name", "Last name is required.");
+      setError(lastName, "err-last-name", es ? "El apellido es obligatorio." : "Last name is required.");
       valid = false;
     } else {
       clearError(lastName, "err-last-name");
     }
 
-    /* Email — basic format check */
     var emailVal = email.value.trim();
     if (!emailVal) {
-      setError(email, "err-email", "Email address is required.");
+      setError(email, "err-email", es ? "El correo electrónico es obligatorio." : "Email address is required.");
       valid = false;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-      setError(email, "err-email", "Please enter a valid email address.");
+      setError(email, "err-email", es ? "Escribe un correo electrónico válido." : "Please enter a valid email address.");
       valid = false;
     } else {
       clearError(email, "err-email");
     }
 
-    /* Category */
+    var phone = qs("#f-phone", form);
+    var country = qs("#f-country", form);
+    if (phone && !phone.value.trim()) {
+      setError(phone, "err-phone", es ? "El teléfono móvil es obligatorio." : "Mobile phone is required.");
+      valid = false;
+    } else if (phone) {
+      clearError(phone, "err-phone");
+    }
+
+    if (country && !country.value.trim()) {
+      setError(country, "err-country", es ? "El país es obligatorio." : "Country is required.");
+      valid = false;
+    } else if (country) {
+      clearError(country, "err-country");
+    }
+
     if (!category.value) {
-      setError(category, "err-category", "Please select an inquiry category.");
+      setError(category, "err-category", es ? "Elige una categoría." : "Please select an inquiry category.");
       valid = false;
     } else {
       clearError(category, "err-category");
     }
 
-    /* Message */
     if (!message.value.trim()) {
-      setError(message, "err-message", "A message is required.");
+      setError(message, "err-message", es ? "El mensaje es obligatorio." : "A message is required.");
       valid = false;
     } else if (message.value.trim().length < 10) {
-      setError(message, "err-message", "Please provide a bit more detail.");
+      setError(message, "err-message", es ? "Cuéntanos un poco más." : "Please provide a bit more detail.");
       valid = false;
     } else {
       clearError(message, "err-message");
@@ -300,12 +254,13 @@
     return valid;
   }
 
-  /** Inline clear-error on input so the user gets immediate positive feedback */
   function bindLiveValidation(form) {
     var pairs = [
       { id: "f-first-name", errId: "err-first-name" },
       { id: "f-last-name",  errId: "err-last-name"  },
       { id: "f-email",      errId: "err-email"      },
+      { id: "f-phone",      errId: "err-phone"      },
+      { id: "f-country",    errId: "err-country"    },
       { id: "f-category",   errId: "err-category"   },
       { id: "f-message",    errId: "err-message"    },
     ];
@@ -327,24 +282,20 @@
       e.preventDefault();
 
       if (!validateForm(form)) {
-        /* focus first error field for accessibility */
         var firstErr = qs(".is-error", form);
         if (firstErr) firstErr.focus();
         return;
       }
 
-      /* ── Preview-mode submission ── */
       var btn      = qs("[type='submit']", form);
       var label    = qs("[data-jg-btn-label]", btn);
       var spinner  = qs("[data-jg-spinner]",   btn);
       var success  = qs("[data-jg-success]",   form);
 
-      /* Show spinner */
       if (label)   label.hidden   = true;
       if (spinner) spinner.hidden = false;
       btn.disabled = true;
 
-      /* Simulate async submission (replace with GHL widget in production) */
       setTimeout(function () {
         if (label)   label.hidden   = false;
         if (spinner) spinner.hidden = true;
@@ -360,15 +311,104 @@
     });
   }
 
-  /* ─────────────────────────────────────────────────────────────────────────
+  /* ══════════════════════════════════════════
+     FOOTER YEAR
+  ══════════════════════════════════════════ */
+  function stampYear() {
+    qsa("[data-jg-year]").forEach(function (el) {
+      el.textContent = new Date().getFullYear();
+    });
+  }
+
+  /* ══════════════════════════════════════════
+     ANIMACIÓN DE ENTRADA AL SCROLL (SCROLL REVEAL)
+  ══════════════════════════════════════════ */
+  function bindStepReveal() {
+    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var viewH = window.innerHeight || document.documentElement.clientHeight;
+    var sections = qsa("#main section").filter(function (el) {
+      if (el.classList.contains("jg-hero")) return false;
+      if (el.querySelector("section")) return false;
+      return true;
+    });
+
+    function onFirstScreen(el) {
+      var rect = el.getBoundingClientRect();
+      return rect.top < viewH - 8 && rect.bottom > 48;
+    }
+
+    function stampDelays(section) {
+      var bits = qsa(".jg-reveal, .jg-way-card, .jg-gospel-step, .jg-next-grid article, .jg-connect-card", section);
+      if (bits.length < 2) return;
+      bits.forEach(function (el, i) {
+        el.classList.add("jg-reveal");
+        el.style.setProperty("--jg-d", Math.min(i, 7) * 0.09 + "s");
+      });
+    }
+
+    var pending = [];
+
+    sections.forEach(function (el) {
+      stampDelays(el);
+      el.classList.add("jg-reveal-block");
+      if (onFirstScreen(el)) {
+        el.classList.add("is-shown");
+      } else {
+        pending.push(el);
+        el.addEventListener("focusin", function () {
+          el.classList.add("is-in");
+        });
+      }
+    });
+
+    if (!pending.length) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        });
+      },
+      { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0 }
+    );
+
+    pending.forEach(function (el) { observer.observe(el);     });
+  }
+
+  function applyInquiryHash() {
+    var hash = (window.location.hash || "").replace(/^#/, "");
+    if (!hash || hash === "es") return;
+
+    var select = qs("[data-jg-category]");
+    var form = qs("[data-jg-form]");
+    if (!select || !form) return;
+    if (!qs('option[value="' + hash + '"]', select)) return;
+
+    select.value = hash;
+    select.dispatchEvent(new Event("change"));
+
+    var header = qs("[data-jg-header]");
+    var offset = header ? header.offsetHeight + 16 : 16;
+    var top = form.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: "smooth" });
+  }
+
+  /* ══════════════════════════════════════════
      INIT
-  ───────────────────────────────────────────────────────────────────────── */
+  ══════════════════════════════════════════ */
   function init() {
     qsa("[data-jg-header]").forEach(bindHeader);
-    bindGlobal();
+    bindScroll();
+    bindSmoothScroll();
     stampYear();
     bindChannelCards();
     bindContactForm();
+    bindStepReveal();
+    applyInquiryHash();
   }
 
   if (document.readyState === "loading") {
@@ -376,8 +416,4 @@
   } else {
     init();
   }
-
-  /* Also run on load in case GHL injects the header after DOMContentLoaded */
-  window.addEventListener("load", init);
-
 })();

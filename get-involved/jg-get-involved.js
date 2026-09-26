@@ -1,19 +1,15 @@
-﻿/**
- * jg-get-involved.js
- * Behaviour for the Get Involved page.
- * Mirrors the pattern used in jg-about.js exactly.
- */
-(function () {
+﻿(function () {
   'use strict';
 
   var DESKTOP = 1025;
-  var bound   = false;
 
   function qs(sel, ctx)  { return (ctx || document).querySelector(sel); }
   function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
   function isDesktop()   { return window.matchMedia('(min-width: ' + DESKTOP + 'px)').matches; }
 
-  /* ── Close all dropdowns in a header ── */
+  /* ══════════════════════════════════════════
+     HEADER — Hamburger + Fullscreen Mobile Menu + Dropdowns
+  ══════════════════════════════════════════ */
   function closeDropdowns(header) {
     qsa('[data-dropdown]', header).forEach(function (item) {
       item.classList.remove('is-open');
@@ -22,52 +18,34 @@
     });
   }
 
-  /* ── Detect GHL parent containers that break position:sticky ── */
-  function parentBreaksSticky(el) {
-    var parent = el.parentElement;
-    while (parent && parent !== document.documentElement) {
-      var style = window.getComputedStyle(parent);
-      if (/(auto|scroll|hidden)/.test(style.overflowY) || style.overflow === 'hidden') {
-        return true;
-      }
-      parent = parent.parentElement;
-    }
-    return false;
-  }
-
-  /* ── Fall back to position:fixed only when sticky is broken ── */
-  function hardenHeader(header) {
-    var page = header.closest('.jg-page') || document.body;
-    if (parentBreaksSticky(header)) {
-      header.classList.add('is-fixed');
-      page.classList.add('is-header-fixed');
-      page.style.setProperty('--jg-header', header.offsetHeight + 'px');
-    } else {
-      header.classList.remove('is-fixed');
-      page.classList.remove('is-header-fixed');
-    }
-  }
-
-  /* ── Bind a single header element ── */
   function bindHeader(header) {
-    if (header.getAttribute('data-jg-ready') === 'true') return;
-    header.setAttribute('data-jg-ready', 'true');
-
     var menuToggle = qs('[data-jg-menu-toggle]', header);
-    hardenHeader(header);
+    var menuClose  = qs('[data-jg-menu-close]', header);
 
-    /* Mobile hamburger */
+    /* Abrir menú móvil estilo NSCA */
     if (menuToggle) {
       menuToggle.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         var open = header.classList.toggle('is-open');
         menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open && !isDesktop() ? 'hidden' : '';
         if (!open) closeDropdowns(header);
       });
     }
 
-    /* Dropdown toggles */
+    /* Botón X para cerrar en móvil */
+    if (menuClose) {
+      menuClose.addEventListener('click', function (e) {
+        e.preventDefault();
+        header.classList.remove('is-open');
+        document.body.style.overflow = '';
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        closeDropdowns(header);
+      });
+    }
+
+    /* Manejo de Dropdowns */
     qsa('[data-dropdown]', header).forEach(function (item) {
       var toggle = qs('[data-dropdown-toggle]', item);
       if (!toggle) return;
@@ -81,106 +59,161 @@
       });
     });
 
-    /* Close menu when a dropdown link is clicked */
-    qsa('.jg-dropdown a', header).forEach(function (link) {
+    /* Cerrar el overlay al hacer clic en cualquier enlace */
+    qsa('.jg-nav a', header).forEach(function (link) {
       link.addEventListener('click', function () {
         header.classList.remove('is-open');
+        document.body.style.overflow = '';
         if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
         closeDropdowns(header);
       });
     });
 
-    /* Close action-dropdowns when their links are clicked */
-    qsa('.jg-dropdown--action a', header).forEach(function (link) {
-      link.addEventListener('click', function () {
+    /* Tecla Escape cierra el menú */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
         closeDropdowns(header);
-      });
+        header.classList.remove('is-open');
+        document.body.style.overflow = '';
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    /* Reset en cambio a escritorio */
+    window.addEventListener('resize', function () {
+      if (isDesktop()) {
+        header.classList.remove('is-open');
+        document.body.style.overflow = '';
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
-  /* ── Global listeners (bound once) ── */
-  function bindGlobal() {
-    if (bound) return;
-    bound = true;
-
-    /* Close dropdowns when clicking outside the header */
-    document.addEventListener('click', function (e) {
-      qsa('[data-jg-header]').forEach(function (header) {
-        if (!header.contains(e.target)) closeDropdowns(header);
-      });
-    });
-
-    /* Escape closes dropdowns and mobile menu */
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== 'Escape') return;
-      qsa('[data-jg-header]').forEach(function (header) {
-        closeDropdowns(header);
-        header.classList.remove('is-open');
-        var toggle = qs('[data-jg-menu-toggle]', header);
-        if (toggle) toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    /* Resize: re-evaluate sticky fallback, collapse mobile menu */
-    window.addEventListener('resize', function () {
-      qsa('[data-jg-header]').forEach(function (header) {
-        hardenHeader(header);
-        if (isDesktop()) {
-          header.classList.remove('is-open');
-          var toggle = qs('[data-jg-menu-toggle]', header);
-          if (toggle) toggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-
-    /* Scroll: add .is-scrolled for shadow enhancement */
-    window.addEventListener('scroll', function () {
-      qsa('[data-jg-header]').forEach(function (header) {
+  function bindScroll() {
+    var header = qs('[data-jg-header]');
+    if (!header) return;
+    window.addEventListener(
+      'scroll',
+      function () {
         header.classList.toggle('is-scrolled', window.scrollY > 8);
-      });
-    }, { passive: true });
+      },
+      { passive: true }
+    );
+  }
 
-    /* Smooth-scroll for in-page anchor links */
+  /* ══════════════════════════════════════════
+     SMOOTH SCROLL
+  ══════════════════════════════════════════ */
+  function bindSmoothScroll() {
+    var header = qs('[data-jg-header]');
+
     document.addEventListener('click', function (e) {
       var link = e.target.closest('a[href^="#"]');
       if (!link) return;
-      var id = link.getAttribute('href');
-      if (!id || id === '#' || id === '#es') return;
-      var target = qs(id);
+
+      var hash = link.getAttribute('href');
+      if (!hash || hash === '#' || hash === '#es') return;
+
+      var target = qs(hash);
       if (!target) return;
+
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      var offset = header ? header.offsetHeight + 12 : 12;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      window.scrollTo({ top: top, behavior: 'smooth' });
     });
   }
 
-  /* ── Footer year ── */
-  function stampYear() {
-    qsa('[data-jg-year]').forEach(function (el) {
-      el.textContent = new Date().getFullYear();
-    });
-  }
-
-  /* ── Newsletter preview stub ── */
+  /* ══════════════════════════════════════════
+     NEWSLETTER
+  ══════════════════════════════════════════ */
   function bindNewsletter() {
     qsa('[data-jg-newsletter]').forEach(function (form) {
-      var status = qs('[data-jg-newsletter-status]', form);
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+        var status = qs('[data-jg-newsletter-status]', form);
+        var email  = qs('input[type="email"]', form);
+        if (!email || !email.value) return;
         if (status) {
-          status.removeAttribute('hidden');
-          status.textContent = 'Thank you! You\'re now subscribed.';
+          status.hidden = false;
+          status.textContent =
+            (document.documentElement.lang === "es" ? "Vista previa: en el sitio publicado esto se envía con un formulario de GoHighLevel." : "Preview only: on the live site this submits through a GoHighLevel form.");
         }
         form.reset();
       });
     });
   }
 
-  /* ── Init ── */
+  /* ══════════════════════════════════════════
+     STEP REVEAL
+  ══════════════════════════════════════════ */
+  function bindStepReveal() {
+    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var viewH = window.innerHeight || document.documentElement.clientHeight;
+    var sections = qsa("#main section").filter(function (el) {
+      if (el.classList.contains("jg-hero")) return false;
+      if (el.querySelector("section")) return false;
+      return true;
+    });
+
+    function onFirstScreen(el) {
+      var rect = el.getBoundingClientRect();
+      return rect.top < viewH - 8 && rect.bottom > 48;
+    }
+
+    function stampDelays(section) {
+      var bits = qsa(".jg-reveal, .jg-way-card, .jg-gospel-step, .jg-next-grid article, .jg-connect-card", section);
+      if (bits.length < 2) return;
+      bits.forEach(function (el, i) {
+        el.classList.add("jg-reveal");
+        el.style.setProperty("--jg-d", Math.min(i, 7) * 0.09 + "s");
+      });
+    }
+
+    var pending = [];
+
+    sections.forEach(function (el) {
+      stampDelays(el);
+      el.classList.add("jg-reveal-block");
+      if (onFirstScreen(el)) {
+        el.classList.add("is-shown");
+      } else {
+        pending.push(el);
+        el.addEventListener("focusin", function () {
+          el.classList.add("is-in");
+        });
+      }
+    });
+
+    if (!pending.length) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        });
+      },
+      { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0 }
+    );
+
+    pending.forEach(function (el) { observer.observe(el); });
+  }
+
+  /* ══════════════════════════════════════════
+     INIT
+  ══════════════════════════════════════════ */
   function init() {
     qsa('[data-jg-header]').forEach(bindHeader);
-    bindGlobal();
-    stampYear();
+    bindScroll();
+    bindSmoothScroll();
     bindNewsletter();
+    bindStepReveal();
   }
 
   if (document.readyState === 'loading') {
@@ -188,8 +221,4 @@
   } else {
     init();
   }
-
-  /* Run again on load in case GHL injects the header after DOMContentLoaded */
-  window.addEventListener('load', init);
-
 })();

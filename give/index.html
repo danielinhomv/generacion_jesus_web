@@ -7,105 +7,158 @@
   <meta name="description" content="Help put the Gospel within reach. Giving supports both reaching and equipping — reach another school, equip another chaplain, train another pastor, send another mission team.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="jg-give.css">
 </head>
 <body>
   <div class="jg-page">
     <a class="jg-skip" href="#main">Skip to content</a>
 
-    <!-- ══════════════════ HEADER ══════════════════ -->
+    <!-- ══════════════════════════ HEADER ══════════════════════════ -->
     <header class="jg-header" data-jg-header>
       <div class="jg-header__inner">
         <a class="jg-header__logo" href="../home/index.html">
-          <img src="../01_BRAND/Jesus_Generation_Official_Logo.png" alt="Jesus Generation">
+          <img src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad518c16266d0c3a71f5ef.png" alt="Jesus Generation">
         </a>
 
+        <!-- NAVEGACIÓN DUAL (DESKTOP HORIZONTAL / MÓVIL OVERLAY) -->
         <nav class="jg-nav" id="jg-primary-nav" aria-label="Primary">
-          <div class="jg-nav__item" data-dropdown>
-            <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-home-menu-give" data-dropdown-toggle>
-              HOME
-              <span class="jg-caret" aria-hidden="true"></span>
-            </button>
-            <ul class="jg-dropdown" id="jg-home-menu-give">
-              <li><a href="../home/index.html"><span class="jg-dd-ico" aria-hidden="true">⌂</span>Why Jesus Generation Matters</a></li>
-              <li><a href="../home/index.html#mission"><span class="jg-dd-ico" aria-hidden="true">◎</span>Mission &amp; Vision</a></li>
-              <li><a href="../home/index.html#what-we-do"><span class="jg-dd-ico" aria-hidden="true">✦</span>What We Do</a></li>
-              <li><a href="../home/index.html#global-impact"><span class="jg-dd-ico" aria-hidden="true">🌐</span>Global Impact</a></li>
-              <li><a href="../home/index.html#mission-trips"><span class="jg-dd-ico" aria-hidden="true">✈</span>Mission Trips</a></li>
-              <li><a href="../home/index.html#how-you-can-help"><span class="jg-dd-ico" aria-hidden="true">♡</span>How You Can Help</a></li>
-            </ul>
+          <div class="jg-nav__mobile-header">
+            <a class="jg-header__logo-mobile" href="../home/index.html">
+              <img src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad518c16266d0c3a71f5ef.png" alt="Jesus Generation">
+            </a>
+            <button class="jg-nav__close" type="button" aria-label="Close Menu" data-jg-menu-close>✕</button>
           </div>
-          <div class="jg-nav__item" data-dropdown>
-            <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-about-menu-give" data-dropdown-toggle>
-              ABOUT
-              <span class="jg-caret" aria-hidden="true"></span>
-            </button>
-            <ul class="jg-dropdown" id="jg-about-menu-give">
-              <li><a href="../about/index.html"><span class="jg-dd-ico" aria-hidden="true">👤</span>Who We Are</a></li>
-              <li><a href="../about/index.html#mission-vision"><span class="jg-dd-ico" aria-hidden="true">◎</span>Mission &amp; Vision</a></li>
-              <li><a href="../about/index.html#our-story"><span class="jg-dd-ico" aria-hidden="true">📖</span>Our Story</a></li>
-              <li><a href="../about/index.html#what-we-believe"><span class="jg-dd-ico" aria-hidden="true">✝</span>What We Believe</a></li>
-              <li><a href="../about/index.html#global-impact"><span class="jg-dd-ico" aria-hidden="true">🌐</span>Global Impact</a></li>
-              <li><a href="../about/index.html#leadership"><span class="jg-dd-ico" aria-hidden="true">👥</span>Leadership</a></li>
-              <li><a href="../about/index.html#accountability"><span class="jg-dd-ico" aria-hidden="true">🛡</span>Accountability &amp; Stewardship</a></li>
-            </ul>
+
+          <div class="jg-nav__list">
+            <div class="jg-nav__item" data-dropdown>
+              <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-home-menu-give" data-dropdown-toggle>
+                HOME
+                <span class="jg-caret" aria-hidden="true"></span>
+                <span class="jg-arrow" aria-hidden="true">›</span>
+              </button>
+              <ul class="jg-dropdown" id="jg-home-menu-give">
+                <li><a href="../home/index.html"><span class="jg-dd-ico" aria-hidden="true">⌂</span>Why Jesus Generation Matters</a></li>
+                <li><a href="../home/index.html#mission"><span class="jg-dd-ico" aria-hidden="true">◎</span>Mission &amp; Vision</a></li>
+                <li><a href="../home/index.html#what-we-do"><span class="jg-dd-ico" aria-hidden="true">✦</span>What We Do</a></li>
+                <li><a href="../home/index.html#global-impact"><span class="jg-dd-ico" aria-hidden="true">🌐</span>Global Impact</a></li>
+                <li><a href="../home/index.html#mission-trips"><span class="jg-dd-ico" aria-hidden="true">✈</span>Mission Trips</a></li>
+                <li><a href="../home/index.html#how-you-can-help"><span class="jg-dd-ico" aria-hidden="true">♡</span>How You Can Help</a></li>
+              </ul>
+            </div>
+
+            <div class="jg-nav__item" data-dropdown>
+              <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-about-menu-give" data-dropdown-toggle>
+                ABOUT
+                <span class="jg-caret" aria-hidden="true"></span>
+                <span class="jg-arrow" aria-hidden="true">›</span>
+              </button>
+              <ul class="jg-dropdown" id="jg-about-menu-give">
+                <li><a href="../about/index.html"><span class="jg-dd-ico" aria-hidden="true">👤</span>Who We Are</a></li>
+                <li><a href="../about/index.html#mission-vision"><span class="jg-dd-ico" aria-hidden="true">◎</span>Mission &amp; Vision</a></li>
+                <li><a href="../about/index.html#our-story"><span class="jg-dd-ico" aria-hidden="true">📖</span>Our Story</a></li>
+                <li><a href="../about/index.html#what-we-believe"><span class="jg-dd-ico" aria-hidden="true">✝</span>What We Believe</a></li>
+                <li><a href="../about/index.html#global-impact"><span class="jg-dd-ico" aria-hidden="true">🌐</span>Global Impact</a></li>
+                <li><a href="../about/index.html#leadership"><span class="jg-dd-ico" aria-hidden="true">👥</span>Leadership</a></li>
+                <li><a href="../about/index.html#accountability"><span class="jg-dd-ico" aria-hidden="true">🛡</span>Accountability &amp; Stewardship</a></li>
+              </ul>
+            </div>
+
+            <div class="jg-nav__item" data-dropdown>
+              <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-academy-menu-give" data-dropdown-toggle>
+                ACADEMY
+                <span class="jg-caret" aria-hidden="true"></span>
+                <span class="jg-arrow" aria-hidden="true">›</span>
+              </button>
+              <ul class="jg-dropdown" id="jg-academy-menu-give">
+                <li><a href="../academy/index.html#explore"><span class="jg-dd-ico" aria-hidden="true">🎓</span>Explore the Academy</a></li>
+                <li><a href="../academy/index.html#chaplaincy"><span class="jg-dd-ico" aria-hidden="true">✝</span>Chaplain Training &amp; Certification</a></li>
+                <li><a href="../academy/index.html#pastoral"><span class="jg-dd-ico" aria-hidden="true">📕</span>Pastoral &amp; Theological Training</a></li>
+                <li><a href="../academy/index.html#leadership"><span class="jg-dd-ico" aria-hidden="true">👥</span>Leadership &amp; Train-the-Trainer</a></li>
+                <li><a href="../academy/index.html#missions"><span class="jg-dd-ico" aria-hidden="true">✈</span>Missions, Evangelism &amp; Discipleship</a></li>
+                <li><a href="../academy/index.html#courses"><span class="jg-dd-ico" aria-hidden="true">📖</span>Course Catalog</a></li>
+                <li><a href="../academy/index.html#login"><span class="jg-dd-ico" aria-hidden="true">🔐</span>My Courses / Login</a></li>
+              </ul>
+            </div>
+
+            <div class="jg-nav__item" data-dropdown>
+              <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-contact-menu-give" data-dropdown-toggle>
+                CONTACT
+                <span class="jg-caret" aria-hidden="true"></span>
+                <span class="jg-arrow" aria-hidden="true">›</span>
+              </button>
+              <ul class="jg-dropdown" id="jg-contact-menu-give">
+                <li><a href="../contact/index.html"><span class="jg-dd-ico" aria-hidden="true">✉</span>Contact Us</a></li>
+                <li><a href="../contact/index.html#prayer"><span class="jg-dd-ico" aria-hidden="true">🙏</span>Prayer Request</a></li>
+                <li><a href="../contact/index.html#media"><span class="jg-dd-ico" aria-hidden="true">🎙</span>Media &amp; Speaking</a></li>
+              </ul>
+            </div>
+
+            <div class="jg-nav__item" data-dropdown>
+              <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-stories-menu" data-dropdown-toggle>
+                STORIES
+                <span class="jg-caret" aria-hidden="true"></span>
+                <span class="jg-arrow" aria-hidden="true">›</span>
+              </button>
+              <ul class="jg-dropdown" id="jg-stories-menu">
+                <li><a href="../stories/index.html"><span class="jg-dd-ico" aria-hidden="true">📖</span>All Stories</a></li>
+                <li><a href="../stories/index.html#students"><span class="jg-dd-ico" aria-hidden="true">🎒</span>Students</a></li>
+                <li><a href="../stories/index.html#families"><span class="jg-dd-ico" aria-hidden="true">🏠</span>Families</a></li>
+                <li><a href="../stories/index.html#chaplains"><span class="jg-dd-ico" aria-hidden="true">✝</span>Chaplains</a></li>
+                <li><a href="../stories/index.html#pastors"><span class="jg-dd-ico" aria-hidden="true">📕</span>Pastors</a></li>
+                <li><a href="../stories/index.html#mission-participants"><span class="jg-dd-ico" aria-hidden="true">✈</span>Mission Participants</a></li>
+                <li><a href="../stories/index.html#academy-students"><span class="jg-dd-ico" aria-hidden="true">🎓</span>Academy Students</a></li>
+                <li><a href="../stories/index.html#national-leaders"><span class="jg-dd-ico" aria-hidden="true">🌐</span>National Leaders</a></li>
+                <li><a href="../stories/index.html#churches"><span class="jg-dd-ico" aria-hidden="true">⛪</span>Churches</a></li>
+                <li><a href="../stories/index.html#communities"><span class="jg-dd-ico" aria-hidden="true">🤝</span>Communities</a></li>
+              </ul>
+            </div>
+
+            <div class="jg-nav__item" data-dropdown>
+              <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-knowjesus-menu-give" data-dropdown-toggle>
+                KNOW JESUS
+                <span class="jg-caret" aria-hidden="true"></span>
+                <span class="jg-arrow" aria-hidden="true">›</span>
+              </button>
+              <ul class="jg-dropdown" id="jg-knowjesus-menu-give">
+                <li><a href="../know-jesus/index.html"><span class="jg-dd-ico" aria-hidden="true">✝</span>Know Jesus</a></li>
+                <li><a href="../know-jesus/index.html#who-is-jesus"><span class="jg-dd-ico" aria-hidden="true">📖</span>Who Is Jesus?</a></li>
+                <li><a href="../know-jesus/index.html#receive"><span class="jg-dd-ico" aria-hidden="true">🙏</span>Receive Jesus</a></li>
+                <li><a href="../know-jesus/index.html#what-happens-next"><span class="jg-dd-ico" aria-hidden="true">✨</span>What Happens Next?</a></li>
+              </ul>
+            </div>
           </div>
-          <div class="jg-nav__item" data-dropdown>
-            <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-academy-menu-give" data-dropdown-toggle>
-              ACADEMY
-              <span class="jg-caret" aria-hidden="true"></span>
-            </button>
-            <ul class="jg-dropdown" id="jg-academy-menu-give">
-              <li><a href="../academy/index.html#explore"><span class="jg-dd-ico" aria-hidden="true">🎓</span>Explore the Academy</a></li>
-              <li><a href="../academy/index.html#chaplaincy"><span class="jg-dd-ico" aria-hidden="true">✝</span>Chaplain Training &amp; Certification</a></li>
-              <li><a href="../academy/index.html#pastoral"><span class="jg-dd-ico" aria-hidden="true">📕</span>Pastoral &amp; Theological Training</a></li>
-              <li><a href="../academy/index.html#leadership"><span class="jg-dd-ico" aria-hidden="true">👥</span>Leadership &amp; Train-the-Trainer</a></li>
-              <li><a href="../academy/index.html#missions"><span class="jg-dd-ico" aria-hidden="true">✈</span>Missions, Evangelism &amp; Discipleship</a></li>
-              <li><a href="../academy/index.html#courses"><span class="jg-dd-ico" aria-hidden="true">📖</span>Course Catalog</a></li>
-              <li><a href="../academy/index.html#login"><span class="jg-dd-ico" aria-hidden="true">🔐</span>My Courses / Login</a></li>
-            </ul>
-          </div>
-          <div class="jg-nav__item" data-dropdown>
-            <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-contact-menu-give" data-dropdown-toggle>
-              CONTACT
-              <span class="jg-caret" aria-hidden="true"></span>
-            </button>
-            <ul class="jg-dropdown" id="jg-contact-menu-give">
-              <li><a href="../contact/index.html"><span class="jg-dd-ico" aria-hidden="true">✉</span>Contact Us</a></li>
-              <li><a href="../contact/index.html#prayer"><span class="jg-dd-ico" aria-hidden="true">🙏</span>Prayer Request</a></li>
-              <li><a href="../contact/index.html#media"><span class="jg-dd-ico" aria-hidden="true">🎙</span>Media &amp; Speaking</a></li>
-            </ul>
-          </div>
-          <div class="jg-nav__item" data-dropdown>
-            <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-stories-menu" data-dropdown-toggle>
-              STORIES
-              <span class="jg-caret" aria-hidden="true"></span>
-            </button>
-            <ul class="jg-dropdown" id="jg-stories-menu">
-              <li><a href="../stories/index.html"><span class="jg-dd-ico" aria-hidden="true">📖</span>All Stories</a></li>
-              <li><a href="../stories/index.html#students"><span class="jg-dd-ico" aria-hidden="true">🎒</span>Students</a></li>
-              <li><a href="../stories/index.html#families"><span class="jg-dd-ico" aria-hidden="true">🏠</span>Families</a></li>
-              <li><a href="../stories/index.html#chaplains"><span class="jg-dd-ico" aria-hidden="true">✝</span>Chaplains</a></li>
-              <li><a href="../stories/index.html#pastors"><span class="jg-dd-ico" aria-hidden="true">📕</span>Pastors</a></li>
-              <li><a href="../stories/index.html#mission-participants"><span class="jg-dd-ico" aria-hidden="true">✈</span>Mission Participants</a></li>
-              <li><a href="../stories/index.html#academy-students"><span class="jg-dd-ico" aria-hidden="true">🎓</span>Academy Students</a></li>
-              <li><a href="../stories/index.html#national-leaders"><span class="jg-dd-ico" aria-hidden="true">🌐</span>National Leaders</a></li>
-              <li><a href="../stories/index.html#churches"><span class="jg-dd-ico" aria-hidden="true">⛪</span>Churches</a></li>
-              <li><a href="../stories/index.html#communities"><span class="jg-dd-ico" aria-hidden="true">🤝</span>Communities</a></li>
-            </ul>
-          </div>
-          <div class="jg-nav__item" data-dropdown>
-            <button class="jg-nav__link" type="button" aria-expanded="false" aria-controls="jg-knowjesus-menu-give" data-dropdown-toggle>
-              KNOW JESUS
-              <span class="jg-caret" aria-hidden="true"></span>
-            </button>
-            <ul class="jg-dropdown" id="jg-knowjesus-menu-give">
-              <li><a href="../know-jesus/index.html"><span class="jg-dd-ico" aria-hidden="true">✝</span>Know Jesus</a></li>
-              <li><a href="../know-jesus/index.html#who-is-jesus"><span class="jg-dd-ico" aria-hidden="true">📖</span>Who Is Jesus?</a></li>
-              <li><a href="../know-jesus/index.html#receive"><span class="jg-dd-ico" aria-hidden="true">🙏</span>Receive Jesus</a></li>
-              <li><a href="../know-jesus/index.html#what-happens-next"><span class="jg-dd-ico" aria-hidden="true">✨</span>What Happens Next?</a></li>
-            </ul>
+
+          <!-- BOTONES EN OVERLAY MÓVIL CON DROPDOWNS -->
+          <div class="jg-nav__cta-mobile">
+            <div class="jg-action-dropdown" data-dropdown>
+              <button class="jg-btn jg-btn--gold jg-btn--full" type="button" aria-expanded="false" aria-controls="jg-gi-mobile-dd" data-dropdown-toggle>
+                GET INVOLVED <span class="jg-caret" aria-hidden="true"></span>
+              </button>
+              <ul class="jg-dropdown jg-dropdown--action" id="jg-gi-mobile-dd">
+                <li><a href="../get-involved/index.html"><span class="jg-dd-ico" aria-hidden="true">✈</span>Mission Trips</a></li>
+                <li><a href="../get-involved/index.html#lead"><span class="jg-dd-ico" aria-hidden="true">🧭</span>Lead a Mission Team</a></li>
+                <li><a href="../get-involved/index.html#serve"><span class="jg-dd-ico" aria-hidden="true">🤝</span>Serve</a></li>
+                <li><a href="../get-involved/index.html#partners"><span class="jg-dd-ico" aria-hidden="true">⛪</span>Church &amp; Ministry Partnerships</a></li>
+                <li><a href="../get-involved/index.html#pray"><span class="jg-dd-ico" aria-hidden="true">🙏</span>Prayer Network</a></li>
+              </ul>
+            </div>
+
+            <div class="jg-action-dropdown" data-dropdown>
+              <button class="jg-btn jg-btn--give-pill jg-btn--full" type="button" aria-expanded="false" aria-controls="jg-give-mobile-dd" data-dropdown-toggle>
+                GIVE TODAY <span class="jg-caret jg-caret--light" aria-hidden="true"></span>
+              </button>
+              <ul class="jg-dropdown jg-dropdown--action" id="jg-give-mobile-dd">
+                <li><a href="#ways-to-give"><span class="jg-dd-ico" aria-hidden="true">❤</span>Give Now</a></li>
+                <li><a href="#ways-to-give"><span class="jg-dd-ico" aria-hidden="true">🎁</span>Ways to Give</a></li>
+                <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">📦</span>In-Kind &amp; Asset Gifts</a></li>
+                <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">₿</span>Crypto Giving</a></li>
+                <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">📈</span>Equities &amp; Securities</a></li>
+                <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">🏠</span>Real Estate &amp; Property</a></li>
+                <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">🔖</span>Legacy Giving</a></li>
+                <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">🏢</span>Corporate &amp; Foundation</a></li>
+              </ul>
+            </div>
           </div>
         </nav>
 
@@ -113,8 +166,9 @@
           <span class="jg-lang" aria-label="Language">
             <a href="index.html" aria-current="page">EN</a>
             <span aria-hidden="true">|</span>
-            <a href="#es">ES</a>
+            <a href="../es/give/index.html">ES</a>
           </span>
+
           <div class="jg-action-dropdown" data-dropdown>
             <button class="jg-btn jg-btn--navy jg-btn--action-dd" type="button" aria-expanded="false" aria-controls="jg-gi-menu-give-dd" data-dropdown-toggle>
               GET INVOLVED <span class="jg-caret jg-caret--light" aria-hidden="true"></span>
@@ -127,18 +181,23 @@
               <li><a href="../get-involved/index.html#pray"><span class="jg-dd-ico" aria-hidden="true">🙏</span>Prayer Network</a></li>
             </ul>
           </div>
+
           <div class="jg-action-dropdown" data-dropdown>
             <button class="jg-btn jg-btn--give jg-btn--action-dd jg-btn--active-give" type="button" aria-expanded="false" aria-controls="jg-give-menu-dd" aria-current="page" data-dropdown-toggle>
               GIVE <span class="jg-caret jg-caret--light" aria-hidden="true"></span>
             </button>
             <ul class="jg-dropdown jg-dropdown--action" id="jg-give-menu-dd">
-              <li><a href="index.html"><span class="jg-dd-ico" aria-hidden="true">❤</span>Give Now</a></li>
-              <li><a href="#monthly"><span class="jg-dd-ico" aria-hidden="true">📅</span>Monthly Partnership</a></li>
-              <li><a href="#equip"><span class="jg-dd-ico" aria-hidden="true">🎓</span>Equip a Leader</a></li>
-              <li><a href="#missions"><span class="jg-dd-ico" aria-hidden="true">✈</span>Support Missions</a></li>
-              <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">➕</span>Other Ways to Give</a></li>
+              <li><a href="#ways-to-give"><span class="jg-dd-ico" aria-hidden="true">❤</span>Give Now</a></li>
+              <li><a href="#ways-to-give"><span class="jg-dd-ico" aria-hidden="true">🎁</span>Ways to Give</a></li>
+              <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">📦</span>In-Kind &amp; Asset Gifts</a></li>
+              <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">₿</span>Crypto Giving</a></li>
+              <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">📈</span>Equities &amp; Securities</a></li>
+              <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">🏠</span>Real Estate &amp; Property</a></li>
+              <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">🔖</span>Legacy Giving</a></li>
+              <li><a href="#other-ways"><span class="jg-dd-ico" aria-hidden="true">🏢</span>Corporate &amp; Foundation</a></li>
             </ul>
           </div>
+
           <button class="jg-header__toggle" type="button" aria-expanded="false" aria-controls="jg-primary-nav" data-jg-menu-toggle>
             <span class="jg-header__toggle-bars" aria-hidden="true"></span>
             <span class="jg-visually-hidden">Menu</span>
@@ -149,214 +208,233 @@
 
     <main id="main">
 
-      <!-- ══════════════════ HERO ══════════════════ -->
-      <section class="jg-hero" aria-labelledby="hero-title">
-        <img class="jg-hero__bg"
-             src="../14_ART_ASSETS/Legacy_GetInvolved_Give_Contact/Give/JG_Give_Hero.jpg"
-             alt="Child in a classroom receiving education through ministry support">
-        <div class="jg-hero__copy">
-          <p class="jg-script">Give</p>
-          <h1 id="hero-title">Help Put the Gospel<br>Within Reach.</h1>
-          <p>Giving supports both reaching and equipping.</p>
-          <div class="jg-hero__ctas">
-            <a class="jg-btn jg-btn--give" href="#pathways">GIVE NOW</a>
-            <a class="jg-btn jg-btn--outline-light" href="#what-a-gift-does">SEE YOUR IMPACT</a>
+      <!-- ── HERO FOTOGRÁFICO DE ALTO IMPACTO (RECTO SANTA CRUZ) ── -->
+      <section class="jg-hero jg-hero--straight" aria-labelledby="hero-title">
+        <img class="jg-hero__bg" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616fde8ed1c29f57bdb1.jpg" alt="Children smiling with Jesus Generation chaplain">
+        <div class="jg-hero__overlay" aria-hidden="true"></div>
+
+        <div class="jg-hero__content-center">
+          <p class="jg-hero__kicker-light">HELP PUT THE GOSPEL WITHIN REACH</p>
+          <h1 id="hero-title">
+            GIVE.
+            <span class="jg-headline-gold">Change Eternities.</span>
+          </h1>
+          <p class="jg-hero__sub">Your generosity equips chaplains, supports schools, and reaches children, families, and communities with the love of Jesus Christ.</p>
+          <div class="jg-hero__ctas-center">
+            <a class="jg-btn jg-btn--gold" href="../contact/index.html#giving">GIVE NOW</a>
+            <a class="jg-btn jg-btn--give-pill" href="#ways-to-give">WAYS TO GIVE</a>
           </div>
         </div>
       </section>
 
-      <!-- ══════════════════ WHAT A GIFT DOES ══════════════════ -->
-      <section class="jg-section" id="what-a-gift-does" aria-labelledby="impact-title">
-        <div class="jg-wrap jg-impact-intro">
-          <div class="jg-impact-intro__copy">
-            <p class="jg-kicker">Your Generosity in Action</p>
-            <h2 id="impact-title">A Gift Can Help…</h2>
-            <ul class="jg-gift-list">
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_icon_school_chaplaincy.png" alt="">
-                Reach another school
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_stat_people.png" alt="">
-                Equip another chaplain
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/about_icon_biblically_guided.png" alt="">
-                Train another pastor
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_stat_academy.png" alt="">
-                Provide an Academy scholarship
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_icon_missions.png" alt="">
-                Send another mission team
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_stat_globe.png" alt="">
-                Translate training into Spanish
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_icon_leadership.png" alt="">
-                Develop national leaders
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_icon_discipleship.png" alt="">
-                Produce discipleship resources
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_stat_school.png" alt="">
-                Expand into another community
-              </li>
-            </ul>
+      <!-- ── WAYS TO GIVE (FULL-WIDTH 1 SOLA FILA CON SLIDER 3 EN 3 Y FLECHAS EXTREMAS) ── -->
+      <section class="jg-section jg-section--cream jg-full-bleed" id="ways-to-give" aria-labelledby="ways-title">
+        <div class="jg-wrap-full">
+          <div class="jg-section-head">
+            <p class="jg-kicker">YOUR GIFT MAKES AN ETERNAL DIFFERENCE</p>
+            <h2 id="ways-title">Ways to Give</h2>
+            <hr class="jg-rule jg-rule--center">
           </div>
-          <div class="jg-impact-intro__img">
-            <img src="../14_ART_ASSETS/Legacy_GetInvolved_Give_Contact/Give/JG_Give_Child_Classroom.jpg"
-                 alt="Child learning in a classroom reached through ministry">
-          </div>
-        </div>
-      </section>
 
-      <!-- ══════════════════ MAJOR GIVING PATHWAYS ══════════════════ -->
-      <section class="jg-section jg-section--cream" id="pathways" aria-labelledby="pathways-title">
-        <div class="jg-wrap">
-          <p class="jg-kicker">Major Giving Pathways</p>
-          <h2 id="pathways-title">Choose How You Want to Give</h2>
-          <hr class="jg-rule">
+          <div class="jg-carousel-container" data-carousel="ways">
+            <button class="jg-carousel-btn jg-carousel-prev" type="button" aria-label="Previous Cards">‹</button>
+            
+            <div class="jg-carousel-track">
+              <article class="jg-card-nsca jg-reveal">
+                <div class="jg-card-nsca__icon">❤</div>
+                <h3>One-Time Gift</h3>
+                <p>Make a single gift to support our mission and help us reach more people with the Gospel.</p>
+                <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">GIVE ONCE</a>
+              </article>
 
-          <div class="jg-pathways-grid">
+              <article class="jg-card-nsca jg-card-nsca--featured jg-reveal" id="monthly">
+                <span class="jg-badge-popular">MOST POPULAR</span>
+                <div class="jg-card-nsca__icon jg-card-nsca__icon--gold">📅</div>
+                <h3>Monthly Giving</h3>
+                <p>Become a monthly partner and provide ongoing support that creates lasting, sustainable impact.</p>
+                <a class="jg-btn jg-btn--gold jg-btn--pill" href="../contact/index.html#giving">GIVE MONTHLY</a>
+              </article>
 
-            <!-- Where Needed Most -->
-            <article class="jg-pathway-card jg-pathway-card--featured">
-              <img src="../14_ART_ASSETS/Legacy_GetInvolved_Give_Contact/Give/JG_Give_Story_Girl.jpg"
-                   alt="Child whose future is shaped by faithful giving">
-              <div class="jg-pathway-card__body">
-                <h3>Where Needed Most</h3>
-                <p>Trust Jesus Generation to direct your gift to the area of greatest current need — reaching schools, equipping chaplains, and multiplying the mission.</p>
-                <a class="jg-btn jg-btn--give" href="/give">GIVE NOW</a>
-              </div>
-            </article>
+              <article class="jg-card-nsca jg-reveal" id="equip">
+                <div class="jg-card-nsca__icon">👥</div>
+                <h3>Sponsor a Chaplain</h3>
+                <p>Help equip and support a chaplain who is changing lives in schools and communities.</p>
+                <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">SPONSOR NOW</a>
+              </article>
 
-            <!-- Reach the Next Generation -->
-            <article class="jg-pathway-card">
-              <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_icon_evangelism.png"
-                   alt="" class="jg-pathway-card__icon">
-              <div class="jg-pathway-card__body">
-                <h3>Reach the Next Generation</h3>
-                <p>Support evangelism and chaplaincy in schools — taking the Gospel to children where they are.</p>
-                <a class="jg-btn jg-btn--navy" href="/give">GIVE</a>
-              </div>
-            </article>
+              <article class="jg-card-nsca jg-reveal" id="missions">
+                <div class="jg-card-nsca__icon">✈</div>
+                <h3>Mission Trips</h3>
+                <p>Give toward mission trips that bring hope, training, and the Gospel to communities in need.</p>
+                <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">GIVE TO TRIPS</a>
+              </article>
 
-            <!-- Equip a Leader -->
-            <article class="jg-pathway-card">
-              <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_icon_leadership.png"
-                   alt="" class="jg-pathway-card__icon">
-              <div class="jg-pathway-card__body">
-                <h3>Equip a Leader</h3>
-                <p>Fund training and education through Jesus Generation Academy — chaplains, pastors, missionaries, and ministry leaders.</p>
-                <a class="jg-btn jg-btn--navy" href="/give/equip-a-leader">GIVE</a>
-              </div>
-            </article>
-
-            <!-- Support Missions -->
-            <article class="jg-pathway-card">
-              <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_icon_missions.png"
-                   alt="" class="jg-pathway-card__icon">
-              <div class="jg-pathway-card__body">
-                <h3>Support Missions</h3>
-                <p>Help send mission teams alongside national leaders — every gift makes direct Gospel ministry possible.</p>
-                <a class="jg-btn jg-btn--navy" href="/give/missions">GIVE</a>
-              </div>
-            </article>
-
-            <!-- Monthly Partnership -->
-            <article class="jg-pathway-card">
-              <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_icon_partner.png"
-                   alt="" class="jg-pathway-card__icon">
-              <div class="jg-pathway-card__body">
-                <h3>Monthly Partnership</h3>
-                <p>Become a monthly partner and provide sustained support that allows Jesus Generation to plan, grow, and multiply with confidence.</p>
-                <a class="jg-btn jg-btn--navy" href="/give/monthly">GIVE MONTHLY</a>
-              </div>
-            </article>
-
-            <!-- Other Ways to Give -->
-            <article class="jg-pathway-card">
-              <img src="../14_ART_ASSETS/Current_Home_About_Academy/Shared_ClipArt/home_stat_cross.png"
-                   alt="" class="jg-pathway-card__icon">
-              <div class="jg-pathway-card__body">
+              <article class="jg-card-nsca jg-reveal">
+                <div class="jg-card-nsca__icon">🎁</div>
                 <h3>Other Ways to Give</h3>
-                <p>In-kind gifts, cryptocurrency, equities and securities, real estate and property, legacy giving, and corporate or foundation giving.</p>
-                <a class="jg-btn jg-btn--navy" href="/give/other-ways">LEARN MORE</a>
+                <p>Explore partner giving, legacy gifts, corporate matching, and specialized options.</p>
+                <a class="jg-btn jg-btn--navy jg-btn--pill" href="#other-ways">LEARN MORE</a>
+              </article>
+            </div>
+
+            <button class="jg-carousel-btn jg-carousel-next" type="button" aria-label="Next Cards">›</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── IN-KIND & ASSET GIVING (FULL-WIDTH 1 SOLA FILA CON SLIDER 3 EN 3 Y FLECHAS EXTREMAS) ── -->
+      <section class="jg-section jg-full-bleed" id="other-ways" aria-labelledby="asset-title">
+        <div class="jg-wrap-full">
+          <div class="jg-section-head">
+            <p class="jg-kicker">IN-KIND &amp; ASSET GIVING</p>
+            <h2 id="asset-title">Additional Ways to Support</h2>
+            <hr class="jg-rule jg-rule--center">
+          </div>
+
+          <div class="jg-carousel-container" data-carousel="assets">
+            <button class="jg-carousel-btn jg-carousel-prev" type="button" aria-label="Previous Cards">‹</button>
+            
+            <div class="jg-carousel-track">
+              <article class="jg-card-asset-nsca jg-reveal">
+                <div class="jg-card-asset-nsca__img">
+                  <img loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616fa721ff13d5be9667.jpg" alt="In-kind gifts">
+                </div>
+                <div class="jg-card-asset-nsca__body">
+                  <h3>In-Kind Gifts</h3>
+                  <p>Provide goods or services that help us train, equip, and care for those we serve.</p>
+                  <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">LEARN MORE</a>
+                </div>
+              </article>
+
+              <article class="jg-card-asset-nsca jg-reveal">
+                <div class="jg-card-asset-nsca__img jg-card-asset-nsca__img--ph">
+                  <img loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6168de8ed1c29f57bc91.png" alt="Crypto">
+                </div>
+                <div class="jg-card-asset-nsca__body">
+                  <h3>Crypto Giving</h3>
+                  <p>Donate Bitcoin, Ethereum, and other cryptocurrencies.</p>
+                  <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">GIVE CRYPTO</a>
+                </div>
+              </article>
+
+              <article class="jg-card-asset-nsca jg-reveal">
+                <div class="jg-card-asset-nsca__img jg-card-asset-nsca__img--ph">
+                  <img loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6168ff484614db2f0305.png" alt="Securities">
+                </div>
+                <div class="jg-card-asset-nsca__body">
+                  <h3>Equities &amp; Securities</h3>
+                  <p>Donate stocks, bonds, or mutual funds to make a lasting impact.</p>
+                  <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">DONATE SECURITIES</a>
+                </div>
+              </article>
+
+              <article class="jg-card-asset-nsca jg-reveal">
+                <div class="jg-card-asset-nsca__img">
+                  <img loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616e711f85a2aab9c9f9.jpg" alt="Real estate">
+                </div>
+                <div class="jg-card-asset-nsca__body">
+                  <h3>Real Estate &amp; Property</h3>
+                  <p>Give real estate or property to advance the Gospel and bless future generations.</p>
+                  <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">LEARN MORE</a>
+                </div>
+              </article>
+
+              <article class="jg-card-asset-nsca jg-reveal">
+                <div class="jg-card-asset-nsca__img">
+                  <img loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616f4091fa65e6629ed7.jpg" alt="Legacy giving">
+                </div>
+                <div class="jg-card-asset-nsca__body">
+                  <h3>Legacy Giving</h3>
+                  <p>Include Jesus Generation in your will or estate and leave a legacy of hope.</p>
+                  <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">LEARN MORE</a>
+                </div>
+              </article>
+
+              <article class="jg-card-asset-nsca jg-reveal">
+                <div class="jg-card-asset-nsca__img">
+                  <img loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616e4091fa65e6629ec7.jpg" alt="Corporate giving">
+                </div>
+                <div class="jg-card-asset-nsca__body">
+                  <h3>Corporate &amp; Foundation</h3>
+                  <p>Partner with us to create lasting change through strategic corporate giving.</p>
+                  <a class="jg-btn jg-btn--navy jg-btn--pill" href="../contact/index.html#giving">PARTNER WITH US</a>
+                </div>
+              </article>
+            </div>
+
+            <button class="jg-carousel-btn jg-carousel-next" type="button" aria-label="Next Cards">›</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── IMPACT & METRICS BOX ── -->
+      <section class="jg-section jg-section--cream" id="impact-stats">
+        <div class="jg-wrap-full">
+          <div class="jg-impact-card jg-reveal">
+            <div class="jg-impact-card__copy">
+              <p class="jg-kicker">YOUR GIFT. THEIR FUTURE.</p>
+              <h2>Because of partners like you, we are reaching more people with the hope of Jesus every day.</h2>
+              <a class="jg-btn jg-btn--navy" href="#story">SEE OUR IMPACT</a>
+            </div>
+
+            <div class="jg-impact-card__stats">
+              <div class="jg-stat-node">
+                <span class="jg-stat-node__ico">🏫</span>
+                <span class="jg-stat-node__num jg-counter" data-target="41000">0</span>
+                <span class="jg-stat-node__lbl">Schools Reached</span>
               </div>
-            </article>
+              <div class="jg-stat-node">
+                <span class="jg-stat-node__ico">👥</span>
+                <span class="jg-stat-node__num jg-counter" data-target="50000">0</span>
+                <span class="jg-stat-node__lbl">Chaplains &amp; Workers</span>
+              </div>
+              <div class="jg-stat-node">
+                <span class="jg-stat-node__ico">🌐</span>
+                <span class="jg-stat-node__num jg-counter" data-target="20">0</span>
+                <span class="jg-stat-node__lbl">Nations</span>
+              </div>
+              <div class="jg-stat-node">
+                <span class="jg-stat-node__ico">❤</span>
+                <span class="jg-stat-node__num">37M+</span>
+                <span class="jg-stat-node__lbl">Lives Within Reach</span>
+              </div>
+            </div>
 
+            <div class="jg-impact-card__img">
+              <img loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616f30b0f957cc7216a0.jpg" alt="Students in classroom">
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- ══════════════════ OTHER WAYS DETAIL ══════════════════ -->
-      <section class="jg-section" id="other-ways" aria-labelledby="other-ways-title">
-        <div class="jg-wrap jg-other-ways">
-
-          <div class="jg-other-ways__copy">
-            <p class="jg-kicker">Other Ways to Give</p>
-            <h2 id="other-ways-title">Beyond the Gift Form</h2>
-            <p>Jesus Generation can receive gifts in several forms. Complex gifts should begin with an inquiry so we can direct your generosity appropriately and responsibly.</p>
-            <ul class="jg-other-list">
-              <li>
-                <img src="../14_ART_ASSETS/Legacy_GetInvolved_Give_Contact/Give/JG_Give_In_Kind.jpg" alt="In-kind gift support">
-                <div>
-                  <strong>In-Kind Gifts</strong>
-                  <span>Equipment, supplies, and other tangible resources.</span>
-                </div>
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Legacy_GetInvolved_Give_Contact/Give/JG_Give_Corporate_Foundation.jpg" alt="Corporate and foundation giving">
-                <div>
-                  <strong>Corporate &amp; Foundation Giving</strong>
-                  <span>Engage your business or foundation alongside the mission.</span>
-                </div>
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Legacy_GetInvolved_Give_Contact/Give/JG_Give_Real_Estate_Property.jpg" alt="Real estate and property giving">
-                <div>
-                  <strong>Real Estate &amp; Property</strong>
-                  <span>Gifts of real estate and property directed through approved processes.</span>
-                </div>
-              </li>
-              <li>
-                <img src="../14_ART_ASSETS/Legacy_GetInvolved_Give_Contact/Give/JG_Give_Legacy.jpg" alt="Legacy giving">
-                <div>
-                  <strong>Legacy Giving</strong>
-                  <span>Include Jesus Generation in your estate planning.</span>
-                </div>
-              </li>
-            </ul>
-            <p class="jg-give-note">Cryptocurrency and equities/securities gifts are also accepted. Contact us to begin the conversation.</p>
-            <a class="jg-btn jg-btn--navy" href="../contact/index.html">CONTACT US ABOUT YOUR GIFT</a>
+      <!-- ── STORY OF HOPE (RESTAURADA TARJETA ÚNICA DE IMPACTO LIMPIA) ── -->
+      <section class="jg-section" id="story">
+        <div class="jg-wrap-full">
+          <div class="jg-story-box jg-reveal">
+            <div class="jg-story-box__img">
+              <img loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616fff484614db2f0425.jpg" alt="Child with hope">
+            </div>
+            <div class="jg-story-box__content">
+              <p class="jg-kicker">STORY OF HOPE</p>
+              <h2>“Because of your gift, I know I am not alone.”</h2>
+              <p>Our school chaplain listened, prayed, and showed me the love of Jesus during a time when I felt afraid. Today, I have hope and a future.</p>
+              <a class="jg-story-box__link" href="../stories/index.html">READ MORE STORIES &rarr;</a>
+            </div>
+            <div class="jg-story-box__bgquote" aria-hidden="true">“</div>
           </div>
-
         </div>
       </section>
 
-      <!-- ══════════════════ CLOSING BANNER ══════════════════ -->
-      <section class="jg-banner" aria-labelledby="banner-title">
-        <img class="jg-banner__bg"
-             src="../14_ART_ASSETS/Legacy_GetInvolved_Give_Contact/Give/JG_Give_Hero.jpg" alt="">
-        <div class="jg-banner__inner">
-          <div>
-            <h2 id="banner-title">Go. Serve. Partner. Give.</h2>
-            <p class="jg-script jg-script--light">Help us raise a generation for Jesus.</p>
+      <!-- ── BOTTOM CALL TO ACTION BANNER (FULL BLEED) ── -->
+      <section class="jg-bottom-bar">
+        <div class="jg-wrap-full jg-bottom-bar__inner">
+          <div class="jg-bottom-bar__text">
+            <div class="jg-bottom-bar__icon">❤</div>
+            <h2>Your generosity today changes lives for eternity.</h2>
           </div>
-          <blockquote>
-            <p>"Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit…"</p>
-            <cite>MATTHEW 28:19</cite>
-          </blockquote>
-          <div class="jg-hero__ctas">
-            <a class="jg-btn jg-btn--give" href="/give">GIVE NOW</a>
-            <a class="jg-btn jg-btn--white" href="../get-involved/index.html">GET INVOLVED</a>
+          <div class="jg-hero__ctas-center">
+            <a class="jg-btn jg-btn--gold" href="../contact/index.html#giving">GIVE NOW</a>
+            <a class="jg-btn jg-btn--give-pill" href="../contact/index.html#giving">DONATE MONTHLY</a>
           </div>
         </div>
       </section>
@@ -368,7 +446,7 @@
       <div class="jg-footer__inner">
         <div>
           <a class="jg-footer__logo" href="../home/index.html">
-            <img src="../01_BRAND/Jesus_Generation_Official_Logo.png" alt="Jesus Generation">
+            <img loading="lazy" src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad518c16266d0c3a71f5ef.png" alt="Jesus Generation">
           </a>
           <p class="jg-footer__phrase">Reach. Equip. Multiply.</p>
           <p>We exist to reach school-age children with the Gospel, make disciples, and equip leaders to multiply the mission in schools, families, communities, and nations.</p>
@@ -386,28 +464,36 @@
           <h3>GIVE</h3>
           <ul>
             <li><a href="index.html">Give Now</a></li>
-            <li><a href="/give/monthly">Monthly Partnership</a></li>
-            <li><a href="/give/equip-a-leader">Equip a Leader</a></li>
-            <li><a href="/give/missions">Support Missions</a></li>
-            <li><a href="/give/other-ways">Other Ways to Give</a></li>
+            <li><a href="#monthly">Monthly Partnership</a></li>
+            <li><a href="#equip">Equip a Leader</a></li>
+            <li><a href="#missions">Support Missions</a></li>
+            <li><a href="#other-ways">Other Ways to Give</a></li>
           </ul>
         </nav>
         <nav aria-label="Get involved">
           <h3>GET INVOLVED</h3>
           <ul>
-            <li><a href="/get-involved/mission-trips">Mission Trips</a></li>
-            <li><a href="/get-involved/serve">Serve</a></li>
-            <li><a href="/get-involved/partners">Partnerships</a></li>
-            <li><a href="/get-involved/pray">Prayer Network</a></li>
+            <li><a href="../get-involved/index.html">Mission Trips</a></li>
+            <li><a href="../get-involved/index.html#serve">Serve</a></li>
+            <li><a href="../get-involved/index.html#partners">Partnerships</a></li>
+            <li><a href="../get-involved/index.html#pray">Prayer Network</a></li>
           </ul>
         </nav>
         <div>
           <h3>STAY CONNECTED</h3>
           <p>Subscribe to our newsletter for stories, updates, and ways to make an impact.</p>
-          <!-- GHL native newsletter form here -->
-          <p class="jg-footer__note">© <span data-jg-year></span> Jesus Generation. All rights reserved.</p>
-          <p class="jg-footer__note"><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms</a> · <a href="/child-safeguarding">Child Safeguarding</a></p>
+          <form class="jg-news" data-jg-newsletter>
+            <label class="jg-visually-hidden" for="jg-email-give">Email address</label>
+            <input id="jg-email-give" name="email" type="email" required placeholder="Email address" autocomplete="email">
+            <button class="jg-btn jg-btn--give" type="submit">SUBSCRIBE</button>
+            <p class="jg-news__status" data-jg-newsletter-status hidden></p>
+          </form>
+          <p class="jg-footer__note">On the live site this uses a native GoHighLevel form with a separate newsletter opt-in.</p>
         </div>
+      </div>
+      <div class="jg-footer__legal">
+        <p>© 2026 Jesus Generation. All rights reserved.</p>
+        <p>Privacy Policy | Terms of Use | Child Safeguarding — content pending approval</p>
       </div>
     </footer>
 

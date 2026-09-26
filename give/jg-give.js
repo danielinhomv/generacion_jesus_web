@@ -1,164 +1,369 @@
-/**
- * jg-give.js — Give page behaviour
- * Same pattern as jg-about.js / jg-contact.js
- */
 (function () {
-  'use strict';
+  "use strict";
 
   var DESKTOP = 1025;
-  var bound   = false;
 
-  function qs(sel, ctx)  { return (ctx || document).querySelector(sel); }
-  function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
-  function isDesktop()   { return window.matchMedia('(min-width:' + DESKTOP + 'px)').matches; }
+  function qs(sel, root) {
+    return (root || document).querySelector(sel);
+  }
 
-  /* ── Close all dropdowns in a header ── */
+  function qsa(sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  }
+
+  function isDesktop() {
+    return window.matchMedia("(min-width: " + DESKTOP + "px)").matches;
+  }
+
+  /* ══════════════════════════════════════════
+     HEADER — Hamburger + Fullscreen Mobile Menu + Dropdowns
+  ══════════════════════════════════════════ */
   function closeDropdowns(header) {
-    qsa('[data-dropdown]', header).forEach(function (item) {
-      item.classList.remove('is-open');
-      var t = qs('[data-dropdown-toggle]', item);
-      if (t) t.setAttribute('aria-expanded', 'false');
+    qsa("[data-dropdown]", header).forEach(function (item) {
+      item.classList.remove("is-open");
+      var toggle = qs("[data-dropdown-toggle]", item);
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
     });
   }
 
-  /* ── Detect GHL overflow:hidden parents that break sticky ── */
-  function parentBreaksSticky(el) {
-    var p = el.parentElement;
-    while (p && p !== document.documentElement) {
-      var s = window.getComputedStyle(p);
-      if (/(auto|scroll|hidden)/.test(s.overflowY) || s.overflow === 'hidden') return true;
-      p = p.parentElement;
-    }
-    return false;
-  }
-
-  function hardenHeader(header) {
-    var page = header.closest('.jg-page') || document.body;
-    if (parentBreaksSticky(header)) {
-      header.classList.add('is-fixed');
-      page.classList.add('is-header-fixed');
-      page.style.setProperty('--jg-header', header.offsetHeight + 'px');
-    } else {
-      header.classList.remove('is-fixed');
-      page.classList.remove('is-header-fixed');
-    }
-  }
-
-  /* ── Bind one header ── */
   function bindHeader(header) {
-    if (header.getAttribute('data-jg-ready') === 'true') return;
-    header.setAttribute('data-jg-ready', 'true');
+    var menuToggle = qs("[data-jg-menu-toggle]", header);
+    var menuClose  = qs("[data-jg-menu-close]", header);
 
-    var toggle = qs('[data-jg-menu-toggle]', header);
-    hardenHeader(header);
-
-    if (toggle) {
-      toggle.addEventListener('click', function (e) {
-        e.preventDefault(); e.stopPropagation();
-        var open = header.classList.toggle('is-open');
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    /* Abrir menú móvil estilo NSCA */
+    if (menuToggle) {
+      menuToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var open = header.classList.toggle("is-open");
+        menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        document.body.style.overflow = open && !isDesktop() ? "hidden" : "";
         if (!open) closeDropdowns(header);
       });
     }
 
-    qsa('[data-dropdown]', header).forEach(function (item) {
-      var btn = qs('[data-dropdown-toggle]', item);
-      if (!btn) return;
-      btn.addEventListener('click', function (e) {
-        e.preventDefault(); e.stopPropagation();
-        var willOpen = !item.classList.contains('is-open');
+    /* Botón X para cerrar en móvil */
+    if (menuClose) {
+      menuClose.addEventListener("click", function (e) {
+        e.preventDefault();
+        header.classList.remove("is-open");
+        document.body.style.overflow = "";
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
         closeDropdowns(header);
-        item.classList.toggle('is-open', willOpen);
-        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+    }
+
+    /* Manejo de Dropdowns de navegación y botones de acción */
+    qsa("[data-dropdown]", header).forEach(function (item) {
+      var toggle = qs("[data-dropdown-toggle]", item);
+      if (!toggle) return;
+      toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var willOpen = !item.classList.contains("is-open");
+        closeDropdowns(header);
+        item.classList.toggle("is-open", willOpen);
+        toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
       });
     });
 
-    qsa('.jg-dropdown a', header).forEach(function (link) {
-      link.addEventListener('click', function () {
-        header.classList.remove('is-open');
-        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    /* Cerrar el overlay al hacer clic en cualquier enlace interno */
+    qsa(".jg-nav a:not([data-dropdown-toggle])", header).forEach(function (link) {
+      link.addEventListener("click", function () {
+        header.classList.remove("is-open");
+        document.body.style.overflow = "";
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
         closeDropdowns(header);
       });
     });
 
-    /* close action-dropdowns when their links are clicked */
-    qsa('.jg-dropdown--action a', header).forEach(function (link) {
-      link.addEventListener('click', function () {
+    /* Tecla Escape cierra el menú */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
         closeDropdowns(header);
-      });
+        header.classList.remove("is-open");
+        document.body.style.overflow = "";
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    /* Clic fuera del header cierra dropdowns */
+    document.addEventListener("click", function (e) {
+      if (!header.contains(e.target)) closeDropdowns(header);
+    });
+
+    /* Reset en cambio de tamaño a escritorio */
+    window.addEventListener("resize", function () {
+      if (isDesktop()) {
+        header.classList.remove("is-open");
+        document.body.style.overflow = "";
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+      }
     });
   }
 
-  /* ── Global listeners (bound once) ── */
-  function bindGlobal() {
-    if (bound) return;
-    bound = true;
+  function bindScroll() {
+    var header = qs("[data-jg-header]");
+    if (!header) return;
+    window.addEventListener(
+      "scroll",
+      function () {
+        header.classList.toggle("is-scrolled", window.scrollY > 8);
+      },
+      { passive: true }
+    );
+  }
 
-    document.addEventListener('click', function (e) {
-      qsa('[data-jg-header]').forEach(function (h) {
-        if (!h.contains(e.target)) closeDropdowns(h);
-      });
-    });
+  /* ══════════════════════════════════════════
+     SMOOTH SCROLL
+  ══════════════════════════════════════════ */
+  function bindSmoothScroll() {
+    var header = qs("[data-jg-header]");
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== 'Escape') return;
-      qsa('[data-jg-header]').forEach(function (h) {
-        closeDropdowns(h);
-        h.classList.remove('is-open');
-        var t = qs('[data-jg-menu-toggle]', h);
-        if (t) t.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    window.addEventListener('resize', function () {
-      qsa('[data-jg-header]').forEach(function (h) {
-        hardenHeader(h);
-        if (isDesktop()) {
-          h.classList.remove('is-open');
-          var t = qs('[data-jg-menu-toggle]', h);
-          if (t) t.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-
-    window.addEventListener('scroll', function () {
-      qsa('[data-jg-header]').forEach(function (h) {
-        h.classList.toggle('is-scrolled', window.scrollY > 8);
-      });
-    }, { passive: true });
-
-    /* Smooth-scroll for in-page anchor links */
-    document.addEventListener('click', function (e) {
+    document.addEventListener("click", function (e) {
       var link = e.target.closest('a[href^="#"]');
       if (!link) return;
-      var id = link.getAttribute('href');
-      if (!id || id === '#' || id === '#es') return;
-      var target = qs(id);
+
+      var hash = link.getAttribute("href");
+      if (!hash || hash === "#" || hash === "#es") return;
+
+      var target = qs(hash);
       if (!target) return;
+
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      var offset = header ? header.offsetHeight + 12 : 12;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      window.scrollTo({ top: top, behavior: "smooth" });
     });
   }
 
-  /* ── Footer year ── */
-  function stampYear() {
-    qsa('[data-jg-year]').forEach(function (el) {
-      el.textContent = new Date().getFullYear();
+  /* ══════════════════════════════════════════
+     CARRUSEL HORIZONTAL CON AUTOPLAY CADA 5S Y FLECHAS
+  ══════════════════════════════════════════ */
+  function bindCarousels() {
+    qsa("[data-carousel]").forEach(function (container) {
+      var track = qs(".jg-carousel-track", container);
+      var prevBtn = qs(".jg-carousel-prev", container);
+      var nextBtn = qs(".jg-carousel-next", container);
+
+      if (!track) return;
+
+      function getScrollAmount() {
+        var card = qs(".jg-card-nsca, .jg-card-asset-nsca", track);
+        if (!card) return 400;
+        return (card.offsetWidth + 32) * (isDesktop() ? 3 : 1);
+      }
+
+      function scrollNext() {
+        var maxScrollLeft = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxScrollLeft - 10) {
+          track.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          track.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+        }
+      }
+
+      function scrollPrev() {
+        if (track.scrollLeft <= 10) {
+          track.scrollTo({ left: track.scrollWidth, behavior: "smooth" });
+        } else {
+          track.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+        }
+      }
+
+      /* Listeners de flechas */
+      if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+          scrollPrev();
+          resetAutoplay();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          scrollNext();
+          resetAutoplay();
+        });
+      }
+
+      /* Temporizador de Autoplay (5 segundos) */
+      var autoplayTimer = setInterval(scrollNext, 5000);
+
+      function resetAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = setInterval(scrollNext, 5000);
+      }
+
+      /* Pausar en Hover o interacción táctil */
+      container.addEventListener("mouseenter", function () {
+        clearInterval(autoplayTimer);
+      });
+
+      container.addEventListener("mouseleave", function () {
+        resetAutoplay();
+      });
+
+      container.addEventListener("touchstart", function () {
+        clearInterval(autoplayTimer);
+      }, { passive: true });
     });
   }
 
-  /* ── Init ── */
+  /* ══════════════════════════════════════════
+     ANIMACIÓN DE CONTADORES DE NÚMEROS
+  ══════════════════════════════════════════ */
+  function bindCounters() {
+    var counters = qsa('.jg-counter');
+    if (!counters.length) return;
+
+    var animated = false;
+
+    function animateCounters() {
+      counters.forEach(function (counter) {
+        var target = parseInt(counter.getAttribute('data-target'), 10);
+        if (isNaN(target)) return;
+
+        var duration = 2000;
+        var start = 0;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var current = Math.floor(progress * (target - start) + start);
+          counter.textContent = current.toLocaleString(document.documentElement.lang === "es" ? "es-419" : "en-US") + '+';
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            counter.textContent = target.toLocaleString(document.documentElement.lang === "es" ? "es-419" : "en-US") + '+';
+          }
+        }
+
+        window.requestAnimationFrame(step);
+      });
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      animateCounters();
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    var section = qs('#impact-stats');
+    if (section) {
+      observer.observe(section);
+    }
+  }
+
+  /* ══════════════════════════════════════════
+     NEWSLETTER
+  ══════════════════════════════════════════ */
+  function bindNewsletter() {
+    qsa("[data-jg-newsletter]").forEach(function (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var status = qs("[data-jg-newsletter-status]", form);
+        var email  = qs('input[type="email"]', form);
+        if (!email || !email.value) return;
+        if (status) {
+          status.hidden = false;
+          status.textContent =
+            (document.documentElement.lang === "es" ? "Vista previa: en el sitio publicado esto se envía con un formulario de GoHighLevel." : "Preview only: on the live site this submits through a GoHighLevel form.");
+        }
+        form.reset();
+      });
+    });
+  }
+
+  /* ══════════════════════════════════════════
+     ANIMACIÓN DE ENTRADA AL SCROLL (SCROLL REVEAL)
+  ══════════════════════════════════════════ */
+  function bindStepReveal() {
+    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var viewH = window.innerHeight || document.documentElement.clientHeight;
+    var sections = qsa("#main section").filter(function (el) {
+      if (el.classList.contains("jg-hero")) return false;
+      if (el.querySelector("section")) return false;
+      return true;
+    });
+
+    function onFirstScreen(el) {
+      var rect = el.getBoundingClientRect();
+      return rect.top < viewH - 8 && rect.bottom > 48;
+    }
+
+    function stampDelays(section) {
+      var bits = qsa(".jg-reveal, .jg-way-card, .jg-gospel-step, .jg-next-grid article, .jg-connect-card", section);
+      if (bits.length < 2) return;
+      bits.forEach(function (el, i) {
+        el.classList.add("jg-reveal");
+        el.style.setProperty("--jg-d", Math.min(i, 7) * 0.09 + "s");
+      });
+    }
+
+    var pending = [];
+
+    sections.forEach(function (el) {
+      stampDelays(el);
+      el.classList.add("jg-reveal-block");
+      if (onFirstScreen(el)) {
+        el.classList.add("is-shown");
+      } else {
+        pending.push(el);
+        el.addEventListener("focusin", function () {
+          el.classList.add("is-in");
+        });
+      }
+    });
+
+    if (!pending.length) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        });
+      },
+      { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0 }
+    );
+
+    pending.forEach(function (el) { observer.observe(el); });
+  }
+
+  /* ══════════════════════════════════════════
+     INIT
+  ══════════════════════════════════════════ */
   function init() {
-    qsa('[data-jg-header]').forEach(bindHeader);
-    bindGlobal();
-    stampYear();
+    qsa("[data-jg-header]").forEach(bindHeader);
+    bindScroll();
+    bindSmoothScroll();
+    bindCarousels();
+    bindCounters();
+    bindNewsletter();
+    bindStepReveal();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
   } else {
     init();
   }
-  window.addEventListener('load', init);
-
 })();
