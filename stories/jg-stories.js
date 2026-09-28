@@ -492,9 +492,45 @@
     renderGlobalSlider(storiesToDisplay);
   }
 
+  function bindStorySwipe(viewport) {
+    var startX = 0;
+    var startY = 0;
+    var tracking = false;
+    var SWIPE = 40;
+
+    viewport.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      tracking = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      if (viewport.setPointerCapture) viewport.setPointerCapture(e.pointerId);
+      if (autoplayTimer) clearInterval(autoplayTimer);
+    });
+
+    function finishSwipe(e) {
+      if (!tracking) return;
+      tracking = false;
+      var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+      if (Math.abs(dx) >= SWIPE && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) nextSlide();
+        else prevSlide();
+      }
+      resetAutoplay();
+    }
+
+    viewport.addEventListener("pointerup", finishSwipe);
+    viewport.addEventListener("pointercancel", function () {
+      if (!tracking) return;
+      tracking = false;
+      resetAutoplay();
+    });
+  }
+
   function setupGlobalCarousel() {
     var prevBtn = qs("#main-prev-btn");
     var nextBtn = qs("#main-next-btn");
+    var viewport = qs(".jg-slider-viewport");
 
     if (prevBtn) {
       prevBtn.addEventListener("click", function () {
@@ -509,6 +545,8 @@
         resetAutoplay();
       });
     }
+
+    if (viewport) bindStorySwipe(viewport);
 
     qsa(".jg-category-bar .jg-cat-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
