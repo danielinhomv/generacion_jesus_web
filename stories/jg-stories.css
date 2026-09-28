@@ -680,6 +680,9 @@ html, body { margin: 0; max-width: 100%; overflow-x: clip; }
   justify-content: center;
   gap: 1.75rem;
   margin-top: 3rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .jg-carousel-arrow {
@@ -694,6 +697,7 @@ html, body { margin: 0; max-width: 100%; overflow-x: clip; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   transition: background 0.2s, transform 0.2s;
 }
 
@@ -707,11 +711,20 @@ html, body { margin: 0; max-width: 100%; overflow-x: clip; }
   display: flex;
   gap: 0.75rem;
   align-items: center;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.jg-carousel-dots::-webkit-scrollbar {
+  display: none;
 }
 
 .jg-carousel-dots .dot {
   width: 13px;
   height: 13px;
+  flex-shrink: 0;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   cursor: pointer;
