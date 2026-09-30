@@ -1,0 +1,7 @@
+/* From the supplied Jesus Generation brand guide. Load licensed Montserrat and Inter font files in the site. */
+:root { --royal-blue:#0D47A1; --sky-blue:#1E88E5; --deep-navy:#0A1E3D; --white:#FFFFFF; --action-red:#E53935; --charcoal:#2B2D31; --medium-gray:#7A7D85; --light-gray:#F0F2F5; }
+body { font-family:Inter,Arial,sans-serif; }
+h1,h2,h3 { font-family:Montserrat,Arial,sans-serif; font-weight:700; }
+.give { background:var(--action-red); color:white; }
+.get-involved { background:white; color:var(--royal-blue); }
+.hero { background-size:cover; background-position:center; }

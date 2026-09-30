@@ -1,0 +1,23 @@
+01-hero
+Reconstruct ONLY the top hero photograph from the attached Jesus Generation homepage, as a standalone high resolution photo, 3840 pixels wide if possible, landscape aspect ratio about 2.35:1. Keep exactly the same six people, faces, clothing, positions, warm sunset school courtyard, adult male chaplain in black polo seated center-right holding open Bible, teenage boy foreground left, teenage girls middle and right, two teenagers behind. Recover photographic detail and remove ALL overlaid headline, paragraphs, button and UI. Keep logo on shirt faithful. Preserve reference composition and placement. No redesign, no new people. Full bleed photograph, no collage.
+
+02-village-background
+Reconstruct ONLY the large mountain village background from the middle 'Why Jesus Generation Matters / What We Do' and statistics section of attached homepage, standalone high resolution 3840 pixels wide if possible, landscape 16:9. Same colonial white church centered slightly right, terracotta rooftops, lush flowering plants, palms, layered green blue mountains, bright pale blue cloudy sky occupying upper half. Remove all headings, icons, text, numbers, dark overlay and page UI. Precisely retain architectural and landscape composition. Restore fine details. No collage.
+
+03-story-of-hope
+Reconstruct ONLY the smiling schoolgirl photograph in the Story of Hope strip of attached homepage. Standalone high resolution photograph, 3840 pixels wide if possible, wide landscape 3:1. Same girl, face, long wavy brown hair, blue clothing, backpack, looking right with smile, sunlight rim lighting, school courtyard behind. Girl in left third and naturally blurred courtyard extends right with no other people. Remove quote, labels, dark overlay, button and all webpage text. Preserve likeness and framing closely. No collage.
+
+04-honduras
+Reconstruct ONLY the Honduras destination photograph in the mission trip cards of attached homepage. High resolution standalone landscape 2400 pixels wide if possible, 3:1. Match exact town rooftops, white colonial twin tower church on right, lush blue green mountain ridgeline behind, clear blue sky. Preserve same composition and warm color. No labels, no border, no page elements, no text. Restore details without redesign. No collage.
+
+05-bolivia
+Reconstruct ONLY the Bolivia destination photograph in mission trip cards of attached homepage. High resolution standalone landscape 2400 pixels wide if possible, 3:1. Same deep blue lake and distant layered mountain scenery, clouds in vivid blue sky, golden ochre green shoreline and hillside foreground on right. Match reference framing and color. No text, no page UI, no border, no collage.
+
+06-panama
+Reconstruct ONLY the Panama destination photograph in mission trip cards of attached homepage. High resolution standalone landscape 2400 pixels wide if possible, 3:1. Match exact Panama City waterfront skyline with modern glass skyscrapers including tall twisting tower at right, tropical palms at left, calm blue water and bright blue sky. Preserve arrangement and colors from reference. No text, no borders, no page elements, no collage.
+
+07-final-banner
+Reconstruct ONLY the photograph behind the bottom 'A generation is waiting' call to action of attached homepage. Standalone high resolution 3840 pixels wide if possible wide landscape 3:1. Preserve same five young people seen from behind arms around each other's shoulders on RIGHT HALF, same backpacks, cap, hair, clothing and warm sunset mountain setting. Left half open naturally subdued blue mountains with room for HTML headline. Remove text and buttons. Closely match reference, recover detail, no redesign, no collage.
+
+08-global-landscape
+Reconstruct ONLY the mountain landscape behind the 'Global Impact' world map strip of attached homepage. High resolution 3840 pixels wide if possible wide landscape 3:1. White and very pale blue softly clouded sky on left and center, warm sunlight on right, green golden mountain slopes lower right with atmospheric layered peaks along bottom. Remove the entire map, labels, heading, paragraphs, slogan and all webpage UI. Preserve reference background. Full bleed photograph, no collage.

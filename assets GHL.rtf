@@ -1,0 +1,247 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2870
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww37860\viewh17740\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+(() => \{\
+  var results = [];\
+  \
+  // 1. Buscamos todas las im\'e1genes de la p\'e1gina\
+  var imgs = Array.from(document.querySelectorAll('img'));\
+  \
+  // 2. Filtramos \'fanicamente las im\'e1genes que est\'e1n en la carpeta multimedia principal\
+  var mediaImgs = imgs.filter(function(img) \{\
+    var src = img.src || img.getAttribute('data-src') || '';\
+    return (src.indexOf('leadconnectorhq.com') !== -1 || src.indexOf('filesafe.space') !== -1) \
+      && src.indexOf('copilot') === -1 \
+      && src.indexOf('sidebar') === -1;\
+  \});\
+\
+  // 3. Recorremos cada imagen para obtener su nombre exacto desde la tarjeta\
+  mediaImgs.forEach(function(img) \{\
+    var url = img.src || img.getAttribute('data-src') || '';\
+    \
+    // Subimos hasta encontrar el contenedor de la tarjeta que guarda el nombre\
+    var card = img.closest('div');\
+    var fileName = '';\
+    var depth = 0;\
+\
+    while (card && depth < 8) \{\
+      var text = card.innerText ? card.innerText.trim() : '';\
+      if (text) \{\
+        var lines = text.split('\\n');\
+        for (var i = 0; i < lines.length; i++) \{\
+          var line = lines[i].trim();\
+          // Detectamos la l\'ednea que tiene extensi\'f3n (.svg, .png, etc)\
+          if (line.match(/\\.(svg|png|jpg|jpeg|gif|webp)/i)) \{\
+            fileName = line;\
+            break;\
+          \}\
+        \}\
+      \}\
+      if (fileName) break;\
+      card = card.parentElement;\
+      depth++;\
+    \}\
+\
+    // Si por alguna raz\'f3n no hall\'f3 el texto en la tarjeta, extraemos el nombre de la URL\
+    if (!fileName) \{\
+      var cleanUrl = url.split('?')[0];\
+      fileName = cleanUrl.substring(cleanUrl.lastIndexOf('/') + 1);\
+    \}\
+\
+    results.push(fileName + '\\t' + url);\
+  \});\
+\
+  var textToCopy = results.join('\\n');\
+\
+  if (results.length > 0) \{\
+    copy(textToCopy);\
+    console.log('\uc0\u9989  \'a1SE COPIARON EXACTAMENTE ' + results.length + ' ARCHIVOS AL PORTAPAPELES!\\n\\n' + textToCopy);\
+  \} else \{\
+    console.error('\uc0\u10060  No se encontraron im\'e1genes en el contenedor.');\
+  \}\
+\})();\
+\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\
+\
+\
+\
+Imagenes extra\'eddas de ghl\
+\
+\{\
+    "home_mission_trip.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616e4091fa65e6629e9d.jpg",\
+    "home_global_bolivia.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616dbdaa5e26a922bd7c.jpg",\
+    "home_hero_children.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616d4091fa65e6629e85.jpg",\
+    "home_final_cta_children.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616d711f85a2aab9c9c9.jpg",\
+    "home_global_honduras.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616da721ff13d5be963b.jpg",\
+    "home_global_colombia.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616c568ea1e227313d38.jpg",\
+    "home_story_student.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616cff484614db2f03b1.jpg",\
+    "home_global_panama.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616cbdaa5e26a922bd28.jpg\'94,\
+"home_stat_school.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616c30b0f957cc72163e.png",\
+    "home_icon_discipleship.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616c568ea1e227313d17.png",\
+    "about_icon_people_focused.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616c4091fa65e6629e41.png",\
+    "home_icon_serve.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616bff484614db2f0389.png",\
+    "about_icon_bible_based.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616b30b0f957cc72160a.png",\
+    "home_stat_academy.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616bff484614db2f0375.png",\
+    "about_icon_nation_impacting.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616a16266d0c3a73b68c.png",\
+    "home_icon_evangelism.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616a4091fa65e6629ded.png",\
+    "about_icon_wise_stewardship.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616a30b0f957cc7215d6.png",\
+    "about_icon_biblically_guided.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616a4091fa65e6629dd9.png",\
+    "home_icon_go.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616ac813e8cb6fe07aa3.png",\
+    "about_icon_christ_centered.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6169a721ff13d5be95c7.png",\
+    "home_icon_school_chaplaincy.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6169c813e8cb6fe07a83.png",\
+    "home_icon_missions.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6169568ea1e227313caf.png",\
+    "home_icon_partner.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6169ff484614db2f0315.png",\
+    "about_icon_committed_truth.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6169c813e8cb6fe07a6f.png",\
+    "home_icon_leadership.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6168ff484614db2f0305.png",\
+    "home_stat_cross.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6168bdaa5e26a922bc94.png",\
+    "home_stat_globe.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6168de8ed1c29f57bc91.png",\
+    "about_icon_accountable_leadership.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6168c813e8cb6fe07a4f.png",\
+    "home_stat_people.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6167bdaa5e26a922bc83.png",\
+    "home_icon_pray.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6167a721ff13d5be958b.png\'94,\
+ "about_accountability_students.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad61674091fa65e6629d75.jpg",\
+    "about_global_impact_children.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6166bdaa5e26a922bc57.jpg",\
+    "about_story_child_learning.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6166ff484614db2f02c9.jpg",\
+    "about_hero_mentor_children.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6166bdaa5e26a922bc4b.jpg",\
+    "about_leadership_portrait_2.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6166568ea1e227313c2b.png",\
+    "about_leadership_portrait_3.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6166711f85a2aab9c8b9.png",\
+    "about_leadership_portrait_1.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6165568ea1e227313bd5.png",\
+    "about_story_mentor_children.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6165a721ff13d5be954d.jpg",\
+    "about_story_mountain_town.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6165c813e8cb6fe079ba.jpg",\
+    "about_story_worship.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6165711f85a2aab9c87a.jpg",\
+    "about_leadership_portrait_5.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6165711f85a2aab9c870.png",\
+    "about_leadership_portrait_4.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6165bdaa5e26a922bc0d.png",\
+    "about_story_youth_group.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6164711f85a2aab9c84b.jpg\'94,\
+"academy_audience_chaplains_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6163a721ff13d5be9521.png",\
+    "academy_chaplain_training_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6164bdaa5e26a922bbb5.png",\
+    "academy_audience_missionaries_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6163a721ff13d5be9517.png",\
+    "academy_audience_believers_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6163de8ed1c29f57bbdb.png",\
+    "academy_missions_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6163bdaa5e26a922bba9.png",\
+    "academy_hero_online_study.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6162a721ff13d5be94d1.jpg",\
+    "academy_pastoral_theological_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6162c813e8cb6fe07911.png",\
+    "academy_leadership_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6162bdaa5e26a922bb7a.png",\
+    "academy_audience_pastors_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6162bdaa5e26a922bb6f.png",\
+    "academy_audience_ministry_leaders_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6162de8ed1c29f57bb90.png",\
+    "academy_course_catalog_icon.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6162bdaa5e26a922bb7b.png\'94,\
+ "JG_Mission_Trip_Bolivia.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad617316266d0c3a73b806.jpg",\
+    "JG_Home_Story_Girl.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6173711f85a2aab9cb0b.jpg",\
+    "JG_Mission_Trip_Honduras.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6173ff484614db2f0509.jpg",\
+    "JG_Home_Hero_Latin_America.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6172711f85a2aab9cadb.jpg",\
+    "JG_Home_Student_Walking_Village.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6172711f85a2aab9caeb.jpg",\
+    "JG_Mission_Trip_Panama.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6172de8ed1c29f57be25.jpg\'94,\
+ "JG_Contact_Hero.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad617230b0f957cc7216f0.jpg",\
+"JG_About_National_Leaders.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6172ff484614db2f04ad.jpg",\
+    "JG_About_Executive_Leadership.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6171ff484614db2f04a1.jpg",\
+    "JG_About_Ministry_Partnerships.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad617116266d0c3a73b7c6.jpg",\
+    "JG_About_LATAM_Leadership.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6171568ea1e227313ddf.jpg\'94,\
+ "JG_Get_Involved_Partner.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6171a721ff13d5be96ac.jpg",\
+    "JG_Get_Involved_Boys_Soccer.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6170568ea1e227313dbb.jpg",\
+    "JG_Get_Involved_Hero.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6170de8ed1c29f57bdc5.jpg",\
+    "JG_Get_Involved_Volunteer.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6170de8ed1c29f57bdd1.jpg",\
+    "JG_Get_Involved_Story_Girl.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad617030b0f957cc7216b4.jpg",\
+    "JG_Get_Involved_Share.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6170ff484614db2f0449.jpg\'94,\
+ "JG_Give_Hero.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616fde8ed1c29f57bdb1.jpg",\
+    "JG_Give_Child_Classroom.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616f30b0f957cc7216a0.jpg",\
+    "JG_Give_Story_Girl.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616fff484614db2f0425.jpg",\
+    "JG_Give_In_Kind.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616fa721ff13d5be9667.jpg",\
+    "JG_Give_Legacy.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616f4091fa65e6629ed7.jpg",\
+    "JG_Give_Corporate_Foundation.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616e4091fa65e6629ec7.jpg",\
+    "JG_Give_Real_Estate_Property.jpg": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad616e711f85a2aab9c9f9.jpg\'94,\
+    "Jesus_Generation_Official_Logo.png": "https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6aad6120c813e8cb6fe07292.png"\
+\}\
+\
+\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97HOME\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+ICONOS\
+\
+leadership-development.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59776c64b8e488b8d25f.svg\
+evangelism.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd597710a2b7bc2b4744e7.svg\
+chaplains.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5977b0ce0b5a44438daa.svg\
+quote.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5977b0ce0b5a44438d9e.svg\
+leadership-development.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59766c64b8e488b8d243.svg\
+location.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59767f8e19690f772e3c.svg\
+phone.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59761b644080e375a62c.svg\
+chaplaincy.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5976dbed623a520d851f.svg\
+schools.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5975568b00dcf90474c9.svg\
+youtube.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59751b644080e375a60c.svg\
+missions-badge.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5975dbed623a520d84f7.svg\
+facebook.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5975dbed623a520d84e3.svg\
+jesus-underline.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd597510a2b7bc2b474456.svg\
+email.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59747f8e19690f772e00.svg\
+nations.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59741b644080e375a5d8.svg\
+students.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5974dbed623a520d84d7.svg\
+discipleship.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59746c64b8e488b8d1e7.svg\
+arrow-right.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd597310a2b7bc2b4743e7.svg\
+instagram.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59737f8e19690f772dd5.svg\
+x.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd597310a2b7bc2b4743d3.svg\
+evangelism-badge.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5973b54f11872a5329c3.svg\
+discipleship-badge.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59726c64b8e488b8d18e.svg\
+missions.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5972f88ee1436cc15dc9.svg\
+chaplaincy-badge.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59727f8e19690f772d7a.svg\
+\
+FOTOS \'97PNG\
+02-village-background.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5968dbed623a520d82e7.png\
+07-final-banner.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59666c64b8e488b8cf81.png\
+04-honduras.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59661b644080e375a3e7.png\
+06-panama.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5966f88ee1436cc15b49.png\
+03-story-of-hope.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596511d7faddd40af422.png\
+08-global-landscape.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5965dbed623a520d827a.png\
+01-hero.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5965b0ce0b5a44438b4c.png\
+05-bolivia.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59647f8e19690f772b5e.png\
+\
+FOTOS \'97WEBG\
+06-panama-1920.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596ef88ee1436cc15cd1.webp\
+06-panama-960.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596f1b644080e375a507.webp\
+08-global-landscape.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596eb0ce0b5a44438c54.webp\
+08-global-landscape-1920.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596e11d7faddd40af56a.webp\
+01-hero-960.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596e6c64b8e488b8d0bd.webp\
+02-village-background.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596db0ce0b5a44438c48.webp\
+02-village-background.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596d6c64b8e488b8d081.webp\
+02-village-background-960.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596cdbed623a520d83c7.webp\
+05-bolivia-1920.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596bdbed623a520d837b.webp\
+06-panama.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596cb54f11872a5328bf.webp\
+04-honduras.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596c7f8e19690f772cad.webp\
+05-bolivia.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596c11d7faddd40af51c.webp\
+04-honduras-960.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596b11d7faddd40af4d8.webp\
+07-final-banner.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596b6c64b8e488b8d039.webp\
+01-hero.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596adbed623a520d834f.webp\
+07-final-banner-960.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596adbed623a520d835f.webp\
+03-story-of-hope.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5969b0ce0b5a44438bb4.webp\
+05-bolivia-960.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5969dbed623a520d8323.webp\
+04-honduras-1920.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5969b54f11872a532855.webp\
+07-final-banner-1920.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59697f8e19690f772c29.webp\
+03-story-of-hope-1920.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59687f8e19690f772c06.webp\
+03-story-of-hope-960.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59686c64b8e488b8cfc5.webp\
+08-global-landscape-960.webp	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5968568b00dcf9047259.webp\
+\
+FOTOS \'97ORIGINALES\
+02-village-background.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5972568b00dcf9047407.png\
+04-honduras.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5971b54f11872a53297b.png\
+07-final-banner.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59701b644080e375a556.png\
+01-hero.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5970f88ee1436cc15d55.png\
+06-panama.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5970b0ce0b5a44438cb8.png\
+08-global-landscape.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5970b54f11872a53292f.png\
+03-story-of-hope.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596f11d7faddd40af5a8.png\
+05-bolivia.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596ff88ee1436cc15d11.png\
+\}\
+MAPA\
+global-impact-map.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59776c64b8e488b8d26b.svg\
+\
+BRANDING\
+logo-stacked-traced.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5978b0ce0b5a44438dd6.svg\
+logo-horizontal-blue.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5978568b00dcf904751d.svg\
+official-logo-original.png	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5978b54f11872a532a4b.png\
+logo-horizontal-white.svg	https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59781b644080e375a67c.svg\
+\
+}
