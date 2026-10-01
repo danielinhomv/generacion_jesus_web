@@ -99,7 +99,7 @@
     var sections = qsa("#main section").filter(function (el) {
       return !el.classList.contains("jg-hero");
     });
-    var cardSel = ".jg-stat, .jg-card, .jg-help article";
+    var cardSel = ".jg-gift";
 
     function show(section) {
       qsa("img[data-src]", section).forEach(loadImg);
