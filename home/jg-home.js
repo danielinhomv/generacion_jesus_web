@@ -99,22 +99,41 @@
     var sections = qsa("#main section").filter(function (el) {
       return !el.classList.contains("jg-hero");
     });
-    var cardSel = ".jg-gift";
+    var pieceSel = [
+      ".jg-why > h2",
+      ".jg-why > p",
+      ".jg-pillar",
+      ".jg-next",
+      ".jg-gifts .jg-wrap > .jg-kicker",
+      ".jg-gifts .jg-wrap > h2",
+      ".jg-gifts__lead",
+      ".jg-gift",
+      ".jg-gifts__note",
+      ".jg-matter__copy > *",
+      ".jg-matter__group",
+      ".jg-harvest",
+      ".jg-global__content > h2",
+      ".jg-global__content > p",
+      ".jg-global__content > a",
+      ".jg-final__content > h2",
+      ".jg-final__content > p",
+      ".jg-final__ctas"
+    ].join(",");
 
     function show(section) {
       qsa("img[data-src]", section).forEach(loadImg);
       if (!reduce) section.classList.add("is-in");
     }
 
+    var groupSel = ".jg-pillar, .jg-next, .jg-gift, .jg-gifts__note, .jg-matter__group, .jg-harvest, .jg-global__figures, .jg-global__content > a, .jg-final__ctas";
+
     if (!reduce) {
       sections.forEach(function (section) {
-        qsa(cardSel, section).forEach(function (el, i) {
-          el.classList.add("jg-reveal");
-          el.style.setProperty("--jg-d", Math.min(i, 7) * 0.09 + "s");
-        });
-        qsa(".jg-pillar", section).forEach(function (el, i) {
-          el.classList.add("jg-drop");
-          el.style.setProperty("--jg-drop", i + "s");
+        var t = 0;
+        qsa(pieceSel, section).forEach(function (el) {
+          el.classList.add("jg-piece");
+          el.style.setProperty("--jg-d", t.toFixed(2) + "s");
+          t += el.matches(groupSel) ? 0.15 : 0.25;
         });
         section.classList.add("jg-reveal-block");
       });
