@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="jg-home.css">
+  <link rel="stylesheet" href="../../home/jg-home.css">
 </head>
 <body>
   <div class="jg-page">
@@ -67,7 +67,7 @@
             <h2 id="seeds-title">The Seeds Are Planted. The Harvest Needs You.</h2>
             <p>Chaplains are building relationships and sharing the Gospel in schools. Your participation helps strengthen outreach, train leaders, and disciple the next generation.</p>
           </div>
-          <div>
+          <div class="jg-why__panel">
             <div class="jg-pillars">
               <article class="jg-pillar">
                 <img class="jg-lazy" data-src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd597310a2b7bc2b4743e7.svg" alt="" width="48" height="48">
@@ -158,41 +158,43 @@
 
       <section class="jg-matter" aria-labelledby="matter-title">
         <div class="jg-matter__band">
-          <div class="jg-wrap">
+          <img class="jg-matter__girl jg-lazy"
+            data-src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59687f8e19690f772c06.webp"
+            data-srcset="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59686c64b8e488b8cfc5.webp 960w, https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59687f8e19690f772c06.webp 1920w, https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5969b0ce0b5a44438bb4.webp 3840w"
+            data-sizes="100vw"
+            alt="A student smiling on a school campus" width="3840" height="1280">
+          <div class="jg-matter__shade"></div>
+          <div class="jg-wrap jg-matter__copy">
             <p class="jg-kicker">Why your participation matters</p>
             <h2 id="matter-title">Help Another Student Hear About Jesus.</h2>
             <p>Your support helps chaplains share the Gospel and provide discipleship in schools.</p>
           </div>
         </div>
-        <div class="jg-wrap jg-matter__split">
-          <img class="jg-lazy"
-            data-src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59687f8e19690f772c06.webp"
-            data-srcset="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59686c64b8e488b8cfc5.webp 960w, https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd59687f8e19690f772c06.webp 1920w, https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5969b0ce0b5a44438bb4.webp 3840w"
-            data-sizes="(min-width: 720px) 50vw, 100vw"
-            alt="A student smiling outdoors at school" width="3840" height="1280">
+        <div class="jg-wrap jg-matter__row">
+          <img class="jg-matter__group jg-lazy"
+            data-src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ac004fac478ac5535891641.png"
+            alt="A chaplain with students in a sunlit courtyard" width="1672" height="940">
           <div class="jg-harvest">
-            <img class="jg-lazy"
-              data-src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ac004fac478ac5535891641.png"
-              alt="A chaplain with students in a sunlit courtyard" width="1672" height="940">
-            <div>
-              <h3>Join the Harvesters</h3>
-              <p>Bring your church or small group alongside local leaders for Gospel outreach and discipleship.</p>
-              <p class="jg-harvest__when">Summer 2027 mission trip to Panama.</p>
-              <a class="jg-btn jg-btn--get" href="https://link.followdrip.com/preview/xING05I0x6b0aLsBK6Gq">Explore mission trips</a>
-            </div>
+            <h3>Join the Harvesters</h3>
+            <p>Bring your church or small group alongside local leaders for Gospel outreach and discipleship.</p>
+            <p class="jg-harvest__when"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3.5v3M16 3.5v3"></path></svg>Summer 2027 mission trip to Panama.</p>
+            <a class="jg-btn jg-btn--ghost" href="https://link.followdrip.com/preview/xING05I0x6b0aLsBK6Gq">Explore mission trips</a>
           </div>
         </div>
       </section>
 
       <section class="jg-global" id="global-impact" aria-labelledby="global-title">
-        <img class="jg-global__photo jg-lazy"
-          data-src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596e11d7faddd40af56a.webp"
-          data-srcset="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd5968568b00dcf9047259.webp 960w, https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596e11d7faddd40af56a.webp 1920w, https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6abd596eb0ce0b5a44438c54.webp 3840w"
-          data-sizes="100vw"
-          alt=""
-          width="3840" height="1280">
+        <picture>
+          <source media="(max-width: 1024px)"
+            srcset="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ac1613c195f9172ed4f85f7.png"
+            width="1000" height="725">
+          <img class="jg-global__photo jg-lazy"
+            data-src="https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ac02b59f30b488137bdf2cf.png"
+            alt="" loading="lazy"
+            width="2170" height="725">
+        </picture>
         <div class="jg-global__shade"></div>
-        <div class="jg-wrap jg-global__content">
+        <div class="jg-global__content">
           <h2 id="global-title">Established Relationships. New Opportunities.</h2>
           <p>Decades of international ministry have built a foundation for your participation.</p>
           <!-- 20+ nations and 41,000 schools stay until Erika sends the exact quarterly report. -->
@@ -276,7 +278,7 @@
       </div>
     </footer>
   </div>
-  <script src="jg-home.js"></script>
+  <script src="../../home/jg-home.js"></script>
   <script src="https://link.followdrip.com/js/form_embed.js"></script>
 </body>
 </html>
