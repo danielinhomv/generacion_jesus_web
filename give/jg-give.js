@@ -1,369 +1,174 @@
 (function () {
   "use strict";
 
-  var DESKTOP = 1025;
+  function qs(sel, root) { return (root || document).querySelector(sel); }
+  function qsa(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
-  function qs(sel, root) {
-    return (root || document).querySelector(sel);
-  }
-
-  function qsa(sel, root) {
-    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
-  }
-
-  function isDesktop() {
-    return window.matchMedia("(min-width: " + DESKTOP + "px)").matches;
-  }
-
-  /* ══════════════════════════════════════════
-     HEADER — Hamburger + Fullscreen Mobile Menu + Dropdowns
-  ══════════════════════════════════════════ */
-  function closeDropdowns(header) {
-    qsa("[data-dropdown]", header).forEach(function (item) {
-      item.classList.remove("is-open");
-      var toggle = qs("[data-dropdown-toggle]", item);
-      if (toggle) toggle.setAttribute("aria-expanded", "false");
-    });
-  }
-
-  function bindHeader(header) {
-    var menuToggle = qs("[data-jg-menu-toggle]", header);
-    var menuClose  = qs("[data-jg-menu-close]", header);
-
-    /* Abrir menú móvil estilo NSCA */
-    if (menuToggle) {
-      menuToggle.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var open = header.classList.toggle("is-open");
-        menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
-        document.body.style.overflow = open && !isDesktop() ? "hidden" : "";
-        if (!open) closeDropdowns(header);
-      });
-    }
-
-    /* Botón X para cerrar en móvil */
-    if (menuClose) {
-      menuClose.addEventListener("click", function (e) {
-        e.preventDefault();
-        header.classList.remove("is-open");
-        document.body.style.overflow = "";
-        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
-        closeDropdowns(header);
-      });
-    }
-
-    /* Manejo de Dropdowns de navegación y botones de acción */
-    qsa("[data-dropdown]", header).forEach(function (item) {
-      var toggle = qs("[data-dropdown-toggle]", item);
-      if (!toggle) return;
-      toggle.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var willOpen = !item.classList.contains("is-open");
-        closeDropdowns(header);
-        item.classList.toggle("is-open", willOpen);
-        toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
-      });
-    });
-
-    /* Cerrar el overlay al hacer clic en cualquier enlace interno */
-    qsa(".jg-nav a:not([data-dropdown-toggle])", header).forEach(function (link) {
-      link.addEventListener("click", function () {
-        header.classList.remove("is-open");
-        document.body.style.overflow = "";
-        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
-        closeDropdowns(header);
-      });
-    });
-
-    /* Tecla Escape cierra el menú */
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        closeDropdowns(header);
-        header.classList.remove("is-open");
-        document.body.style.overflow = "";
-        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-
-    /* Clic fuera del header cierra dropdowns */
-    document.addEventListener("click", function (e) {
-      if (!header.contains(e.target)) closeDropdowns(header);
-    });
-
-    /* Reset en cambio de tamaño a escritorio */
-    window.addEventListener("resize", function () {
-      if (isDesktop()) {
-        header.classList.remove("is-open");
-        document.body.style.overflow = "";
-        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  function bindScroll() {
+  function bindMenu() {
     var header = qs("[data-jg-header]");
     if (!header) return;
-    window.addEventListener(
-      "scroll",
-      function () {
-        header.classList.toggle("is-scrolled", window.scrollY > 8);
-      },
-      { passive: true }
-    );
-  }
-
-  /* ══════════════════════════════════════════
-     SMOOTH SCROLL
-  ══════════════════════════════════════════ */
-  function bindSmoothScroll() {
-    var header = qs("[data-jg-header]");
-
-    document.addEventListener("click", function (e) {
-      var link = e.target.closest('a[href^="#"]');
-      if (!link) return;
-
-      var hash = link.getAttribute("href");
-      if (!hash || hash === "#" || hash === "#es") return;
-
-      var target = qs(hash);
-      if (!target) return;
-
-      e.preventDefault();
-
-      var offset = header ? header.offsetHeight + 12 : 12;
-      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-
-      window.scrollTo({ top: top, behavior: "smooth" });
+    var toggle = qs("[data-jg-menu-toggle]", header);
+    if (!toggle) return;
+    toggle.addEventListener("click", function () {
+      var open = header.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    qsa("a", header).forEach(function (link) {
+      link.addEventListener("click", function () {
+        header.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
     });
   }
 
-  /* ══════════════════════════════════════════
-     CARRUSEL HORIZONTAL CON AUTOPLAY CADA 5S Y FLECHAS
-  ══════════════════════════════════════════ */
-  function bindCarousels() {
-    qsa("[data-carousel]").forEach(function (container) {
-      var track = qs(".jg-carousel-track", container);
-      var prevBtn = qs(".jg-carousel-prev", container);
-      var nextBtn = qs(".jg-carousel-next", container);
-
-      if (!track) return;
-
-      function getScrollAmount() {
-        var card = qs(".jg-card-nsca, .jg-card-asset-nsca", track);
-        if (!card) return 400;
-        return (card.offsetWidth + 32) * (isDesktop() ? 3 : 1);
-      }
-
-      function scrollNext() {
-        var maxScrollLeft = track.scrollWidth - track.clientWidth;
-        if (track.scrollLeft >= maxScrollLeft - 10) {
-          track.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          track.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
-        }
-      }
-
-      function scrollPrev() {
-        if (track.scrollLeft <= 10) {
-          track.scrollTo({ left: track.scrollWidth, behavior: "smooth" });
-        } else {
-          track.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
-        }
-      }
-
-      /* Listeners de flechas */
-      if (prevBtn) {
-        prevBtn.addEventListener("click", function () {
-          scrollPrev();
-          resetAutoplay();
-        });
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener("click", function () {
-          scrollNext();
-          resetAutoplay();
-        });
-      }
-
-      /* Temporizador de Autoplay (5 segundos) */
-      var autoplayTimer = setInterval(scrollNext, 5000);
-
-      function resetAutoplay() {
-        clearInterval(autoplayTimer);
-        autoplayTimer = setInterval(scrollNext, 5000);
-      }
-
-      /* Pausar en Hover o interacción táctil */
-      container.addEventListener("mouseenter", function () {
-        clearInterval(autoplayTimer);
-      });
-
-      container.addEventListener("mouseleave", function () {
-        resetAutoplay();
-      });
-
-      container.addEventListener("touchstart", function () {
-        clearInterval(autoplayTimer);
-      }, { passive: true });
-    });
+  function formatStat(n, suffix) {
+    var text = n.toLocaleString("en-US");
+    return suffix ? text + suffix : text;
   }
 
-  /* ══════════════════════════════════════════
-     ANIMACIÓN DE CONTADORES DE NÚMEROS
-  ══════════════════════════════════════════ */
-  function bindCounters() {
-    var counters = qsa('.jg-counter');
-    if (!counters.length) return;
-
-    var animated = false;
-
-    function animateCounters() {
-      counters.forEach(function (counter) {
-        var target = parseInt(counter.getAttribute('data-target'), 10);
-        if (isNaN(target)) return;
-
-        var duration = 2000;
-        var start = 0;
-        var startTime = null;
-
-        function step(timestamp) {
-          if (!startTime) startTime = timestamp;
-          var progress = Math.min((timestamp - startTime) / duration, 1);
-          var current = Math.floor(progress * (target - start) + start);
-          counter.textContent = current.toLocaleString(document.documentElement.lang === "es" ? "es-419" : "en-US") + '+';
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          } else {
-            counter.textContent = target.toLocaleString(document.documentElement.lang === "es" ? "es-419" : "en-US") + '+';
-          }
-        }
-
-        window.requestAnimationFrame(step);
-      });
+  function animateCount(el) {
+    var target = Number(el.getAttribute("data-target"));
+    var suffix = el.getAttribute("data-suffix") || "";
+    if (!target) return;
+    var start = 0;
+    var duration = 950;
+    var t0 = null;
+    function frame(now) {
+      if (!t0) t0 = now;
+      var p = Math.min(1, (now - t0) / duration);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = formatStat(Math.round(target * eased), suffix);
+      if (p < 1) requestAnimationFrame(frame);
     }
+    requestAnimationFrame(frame);
+  }
 
-    if (!('IntersectionObserver' in window)) {
-      animateCounters();
+  function bindStats() {
+    var nodes = qsa("[data-target]");
+    if (!nodes.length || !("IntersectionObserver" in window)) {
+      nodes.forEach(function (el) {
+        el.textContent = formatStat(Number(el.getAttribute("data-target")), el.getAttribute("data-suffix") || "");
+      });
       return;
     }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
-            animateCounters();
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    var section = qs('#impact-stats');
-    if (section) {
-      observer.observe(section);
-    }
+    var seen = new WeakSet();
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || seen.has(entry.target)) return;
+        seen.add(entry.target);
+        animateCount(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.25 });
+    nodes.forEach(function (el) { observer.observe(el); });
   }
 
-  /* ══════════════════════════════════════════
-     NEWSLETTER
-  ══════════════════════════════════════════ */
   function bindNewsletter() {
     qsa("[data-jg-newsletter]").forEach(function (form) {
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         var status = qs("[data-jg-newsletter-status]", form);
-        var email  = qs('input[type="email"]', form);
-        if (!email || !email.value) return;
+        var email = qs('input[type="email"]', form);
+        var consent = qs('input[type="checkbox"]', form);
+        if (!email || !email.value || (consent && !consent.checked)) return;
         if (status) {
           status.hidden = false;
-          status.textContent =
-            (document.documentElement.lang === "es" ? "Vista previa: en el sitio publicado esto se envía con un formulario de GoHighLevel." : "Preview only: on the live site this submits through a GoHighLevel form.");
+          status.textContent = "Preview only. This box will connect to a GoHighLevel form. The email was not saved.";
         }
-        form.reset();
       });
     });
   }
 
-  /* ══════════════════════════════════════════
-     ANIMACIÓN DE ENTRADA AL SCROLL (SCROLL REVEAL)
-  ══════════════════════════════════════════ */
-  function bindStepReveal() {
-    if (!("IntersectionObserver" in window)) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  function loadImg(img) {
+    if (!img || img.getAttribute("data-jg-loaded") === "1") return;
+    var src = img.getAttribute("data-src");
+    if (!src) return;
+    img.setAttribute("data-jg-loaded", "1");
+    var srcset = img.getAttribute("data-srcset");
+    var sizes = img.getAttribute("data-sizes");
+    if (srcset) img.setAttribute("srcset", srcset);
+    if (sizes) img.setAttribute("sizes", sizes);
+    function done() { img.classList.add("is-loaded"); }
+    img.addEventListener("load", done);
+    img.setAttribute("src", src);
+    if (img.complete && img.naturalWidth) done();
+  }
 
-    var viewH = window.innerHeight || document.documentElement.clientHeight;
+  function bindReveal() {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var sections = qsa("#main section").filter(function (el) {
-      if (el.classList.contains("jg-hero")) return false;
-      if (el.querySelector("section")) return false;
-      return true;
+      return !el.classList.contains("jg-hero") && !el.classList.contains("jg-soon");
     });
+    var pieceSel = [
+      ".jg-why > h2",
+      ".jg-why > p",
+      ".jg-pillar",
+      ".jg-next",
+      ".jg-gifts .jg-wrap > .jg-kicker",
+      ".jg-gifts .jg-wrap > h2",
+      ".jg-gifts__lead",
+      ".jg-gift",
+      ".jg-gifts__note",
+      ".jg-matter__copy > *",
+      ".jg-matter__group",
+      ".jg-harvest",
+      ".jg-global__content > h2",
+      ".jg-global__content > p",
+      ".jg-global__content > a",
+      ".jg-final__content > h2",
+      ".jg-final__content > p",
+      ".jg-final__ctas"
+    ].join(",");
 
-    function onFirstScreen(el) {
-      var rect = el.getBoundingClientRect();
-      return rect.top < viewH - 8 && rect.bottom > 48;
+    function show(section) {
+      qsa("img[data-src]", section).forEach(loadImg);
+      if (!reduce) section.classList.add("is-in");
     }
 
-    function stampDelays(section) {
-      var bits = qsa(".jg-reveal, .jg-way-card, .jg-gospel-step, .jg-next-grid article, .jg-connect-card", section);
-      if (bits.length < 2) return;
-      bits.forEach(function (el, i) {
-        el.classList.add("jg-reveal");
-        el.style.setProperty("--jg-d", Math.min(i, 7) * 0.09 + "s");
+    var groupSel = ".jg-pillar, .jg-next, .jg-gift, .jg-gifts__note, .jg-matter__group, .jg-harvest, .jg-global__figures, .jg-global__content > a, .jg-final__ctas";
+
+    if (!reduce) {
+      sections.forEach(function (section) {
+        var t = 0;
+        qsa(pieceSel, section).forEach(function (el) {
+          el.classList.add("jg-piece");
+          el.style.setProperty("--jg-d", t.toFixed(2) + "s");
+          t += el.matches(groupSel) ? 0.1 : 0.16;
+        });
+        section.classList.add("jg-reveal-block");
       });
     }
 
-    var pending = [];
+    if (!("IntersectionObserver" in window)) {
+      sections.forEach(show);
+      return;
+    }
 
+    var viewH = window.innerHeight || document.documentElement.clientHeight;
+    var pending = [];
     sections.forEach(function (el) {
-      stampDelays(el);
-      el.classList.add("jg-reveal-block");
-      if (onFirstScreen(el)) {
-        el.classList.add("is-shown");
+      var rect = el.getBoundingClientRect();
+      if (rect.top < viewH - 8 && rect.bottom > 48) {
+        if (!reduce) el.classList.add("is-shown");
+        show(el);
       } else {
         pending.push(el);
-        el.addEventListener("focusin", function () {
-          el.classList.add("is-in");
-        });
       }
     });
-
     if (!pending.length) return;
 
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-in");
-          observer.unobserve(entry.target);
-        });
-      },
-      { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0 }
-    );
-
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        show(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { root: null, rootMargin: "0px 0px -3% 0px", threshold: 0 });
     pending.forEach(function (el) { observer.observe(el); });
   }
 
-  /* ══════════════════════════════════════════
-     INIT
-  ══════════════════════════════════════════ */
-  function init() {
-    qsa("[data-jg-header]").forEach(bindHeader);
-    bindScroll();
-    bindSmoothScroll();
-    bindCarousels();
-    bindCounters();
-    bindNewsletter();
-    bindStepReveal();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
+  bindMenu();
+  bindStats();
+  bindNewsletter();
+  bindReveal();
 })();
