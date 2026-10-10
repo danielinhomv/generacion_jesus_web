@@ -156,6 +156,13 @@
 .jg-info-card > p,
 .jg-office__body > p,
 .jg-prayer > p { color: var(--jg-charcoal); }
+.jg-contact-frame {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  border: 0;
+  background: transparent;
+}
 .jg-contact-form {
   display: grid;
   gap: 0.45rem;

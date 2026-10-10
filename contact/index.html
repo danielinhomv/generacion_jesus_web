@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:ital,wght@0,600;0,700;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../home/jg-home.css">
-  <link rel="stylesheet" href="jg-contact.css?v=29">
+  <link rel="stylesheet" href="jg-contact.css?v=30">
 </head>
 <body>
   <div class="jg-page">
@@ -104,79 +104,26 @@
           <div class="jg-panel jg-form-card">
             <h2 id="message-title">Send Us a Message</h2>
             <p>Fill out the form below and a member of our team will get back to you as soon as possible.</p>
-            <form class="jg-contact-form" data-jg-contact-form novalidate>
-              <div class="jg-field-row">
-                <div>
-                  <label for="jg-first">First name <span aria-hidden="true">*</span></label>
-                  <input id="jg-first" name="first_name" type="text" autocomplete="given-name" required placeholder="First name">
-                </div>
-                <div>
-                  <label for="jg-last">Last name <span aria-hidden="true">*</span></label>
-                  <input id="jg-last" name="last_name" type="text" autocomplete="family-name" required placeholder="Last name">
-                </div>
-              </div>
-
-              <label for="jg-email">Email <span aria-hidden="true">*</span></label>
-              <input id="jg-email" name="email" type="email" autocomplete="email" required placeholder="Your email address">
-
-              <div class="jg-field-row">
-                <div>
-                  <label id="jg-country-label" for="jg-country">Country <span aria-hidden="true">*</span></label>
-                  <div class="jg-country" data-jg-country>
-                    <button type="button" class="jg-country__btn is-empty" id="jg-country" aria-haspopup="listbox" aria-expanded="false" aria-required="true" aria-labelledby="jg-country-label">
-                      <span class="jg-country__flag" data-jg-country-flag hidden></span>
-                      <span class="jg-country__value" data-jg-country-value>Select your country</span>
-                      <span class="jg-country__badge" data-jg-country-badge hidden></span>
-                    </button>
-                    <input type="hidden" name="country" value="">
-                    <input type="hidden" name="dial_code" value="">
-                    <div class="jg-country__panel" hidden>
-                      <input class="jg-country__search" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="jg-country-list" aria-label="Search country or code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Search country or code">
-                      <ul class="jg-country__list" id="jg-country-list" role="listbox" aria-label="Countries"></ul>
-                    </div>
-                  </div>
-                  <p class="jg-field-error" id="jg-country-error" data-jg-country-error hidden></p>
-                </div>
-                <div>
-                  <label for="jg-phone">Mobile phone <span aria-hidden="true">*</span></label>
-                  <div class="jg-phone" data-jg-phone>
-                    <span class="jg-phone__code is-empty" id="jg-phone-code" data-jg-phone-code>+</span>
-                    <input id="jg-phone" name="phone_national" type="tel" autocomplete="tel-national" inputmode="numeric" aria-describedby="jg-phone-hint" placeholder="Mobile number">
-                  </div>
-                  <input type="hidden" name="phone" value="">
-                  <p class="jg-field-hint" id="jg-phone-hint" data-jg-phone-hint aria-live="polite">Choose your country and the dialing code is added for you.</p>
-                </div>
-              </div>
-
-              <label for="jg-org">Church / organization <span class="jg-optional">(optional)</span></label>
-              <input id="jg-org" name="organization" type="text" autocomplete="organization" placeholder="Church or organization">
-
-              <label for="jg-subject">Reason for contact <span aria-hidden="true">*</span></label>
-              <div class="jg-select">
-                <select id="jg-subject" name="subject" required>
-                  <option value="" selected disabled>What is this regarding?</option>
-                  <option value="general">General inquiry</option>
-                  <option value="missions">Mission trips</option>
-                  <option value="partnerships">Church partnerships</option>
-                  <option value="media">Media / speaking</option>
-                  <option value="prayer">Prayer request</option>
-                  <option value="giving">Giving</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <label for="jg-note">Message <span aria-hidden="true">*</span></label>
-              <textarea id="jg-note" name="message" rows="6" required placeholder="How can we help you?"></textarea>
-
-              <button class="jg-btn jg-btn--get" type="submit">
-                <img src="../contact_finish/icons/send.svg" alt="" width="18" height="18">
-                Send message
-              </button>
-              <p class="jg-contact-form__status" data-jg-contact-status hidden>
-                <img src="../contact_finish/icons/check.svg" alt="" width="20" height="20">
-                <span></span>
-              </p>
-            </form>
+            <iframe
+              class="jg-contact-frame"
+              src="https://link.followdrip.com/widget/form/Qok6QWXqNFsHYmerboKM"
+              style="width:100%;height:1040px;border:none;border-radius:8px"
+              id="inline-Qok6QWXqNFsHYmerboKM"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Contact-Jesus Generation Website"
+              data-height="1040"
+              data-layout-iframe-id="inline-Qok6QWXqNFsHYmerboKM"
+              data-form-id="Qok6QWXqNFsHYmerboKM"
+              data-cookie-consent="true"
+              data-cookie-consent-provider="auto"
+              title="Contact-Jesus Generation Website"
+            ></iframe>
           </div>
 
           <div class="jg-panel jg-info-card">
