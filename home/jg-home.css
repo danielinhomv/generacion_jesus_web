@@ -750,6 +750,30 @@ p { margin: 0 0 0.9rem; }
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.82);
 }
+.jg-social--footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.35rem;
+  margin-top: 1.05rem;
+}
+.jg-social--footer a,
+.jg-social--footer a[aria-label="Facebook"] {
+  width: 3rem;
+  height: 3rem;
+  background: transparent;
+  display: grid;
+  place-items: center;
+}
+.jg-social--footer a img {
+  width: 3rem;
+  height: 3rem;
+  max-width: none;
+  filter: brightness(0) invert(1);
+}
+.jg-social--footer a[aria-label="Facebook"] img {
+  filter: none;
+}
 .jg-news { display: grid; gap: 0.55rem; }
 .jg-news input[type="email"] {
   min-height: 44px;
@@ -765,15 +789,35 @@ p { margin: 0 0 0.9rem; }
 .jg-news__status { font-size: 0.85rem; color: #d7e6ff; }
 .jg-news-frame {
   display: block;
-  width: 100%;
-  height: 290px !important;
-  max-height: 290px !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 100% !important;
+  height: 340px !important;
   border: 0 !important;
   border-radius: 0;
   outline: 0;
   box-shadow: none;
   background: transparent;
   overflow: hidden;
+}
+/* Phone: lay the form out wider than the column, then scale it back so the
+   Cloudflare success badge is not clipped on the right. */
+@media (max-width: 719px) {
+  .jg-footer__grid > div:last-child {
+    container-type: inline-size;
+    overflow: hidden;
+  }
+  .jg-news-frame {
+    position: relative !important;
+    left: auto !important;
+    width: 400px !important;
+    min-width: 400px !important;
+    max-width: none !important;
+    height: 340px !important;
+    transform: scale(calc(100cqw / 400px));
+    transform-origin: top left;
+    margin-bottom: calc(340px * (100cqw / 400px) - 340px);
+  }
 }
 .jg-footer__base {
   width: min(1120px, calc(100% - 2rem));
@@ -892,6 +936,12 @@ p { margin: 0 0 0.9rem; }
   .jg-footer a { transition: color 0.2s ease; }
   .jg-footer a:hover,
   .jg-footer a:focus-visible { color: var(--jg-sky); }
+  .jg-social--footer a { transition: opacity 0.2s ease; }
+  .jg-social--footer a:hover,
+  .jg-social--footer a:focus-visible {
+    color: inherit;
+    opacity: 0.75;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .jg-reveal-block,
@@ -950,12 +1000,34 @@ p { margin: 0 0 0.9rem; }
   }
   .jg-harvest { padding-top: 0.6rem; }
   .jg-matter__group { box-shadow: 0 12px 30px rgba(10, 30, 61, 0.14); }
-  .jg-footer__grid { grid-template-columns: 1.2fr 0.8fr 0.8fr 1.3fr; }
+  .jg-footer__grid { grid-template-columns: 0.95fr 0.62fr 0.58fr 2.2fr; }
   .jg-footer__grid > * + * {
-    border-left: 2px solid #5CB8F5;
+    border-left: 1px solid rgba(255, 255, 255, 0.22);
     padding-left: 1.35rem;
   }
   .jg-footer__logo img.jg-logo-h { height: 104px; }
+}
+
+.jg-footer--social > .jg-wrap,
+.jg-footer--social > .jg-footer__base {
+  width: min(1280px, calc(100% - 2rem));
+}
+
+@media (min-width: 720px) {
+  .jg-footer--social .jg-footer__grid {
+    grid-template-columns: 1.1fr 0.55fr 0.75fr 1.9fr;
+    column-gap: 2rem;
+  }
+  .jg-footer--social .jg-social--footer {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (min-width: 1280px) {
+  .jg-footer--social > .jg-wrap,
+  .jg-footer--social > .jg-footer__base {
+    width: min(1400px, calc(100% - 3rem));
+  }
 }
 
 @media (min-width: 1025px) {

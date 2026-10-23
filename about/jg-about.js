@@ -180,18 +180,26 @@
     var fileEl = qs("[data-jg-bio-file]", dialog);
     var frame = qs("[data-jg-bio-frame]", dialog);
     var lastFocus = null;
-    var pdfs = {
+    var pdfs = window.JG_BIO_PDFS || {
       rocky: {
         name: "Rocky J. Malloy",
         src: "../about_finish/leadershep/2026 Bio Rocky J Malloy June.pdf"
       },
+      stacy: {
+        name: "Stacy Valentine",
+        src: "../about_finish/leadershep/Stacy Short Bio 2026.pdf"
+      },
+      erika: {
+        name: "Erika Román Balderrama",
+        src: "../about_finish/leadershep/Biografia Erika Roman 2026.pdf"
+      },
       jose: {
-        name: "Jose Morales",
+        name: "José Morales",
         src: "../about_finish/leadershep/Jose Morales - EN.pdf"
       },
       efrain: {
-        name: "Efrain Duran",
-        src: "../about_finish/leadershep/Efrain_Duran_Professional_Resume - 8-23-26.pdf"
+        name: "Efraín Durán",
+        src: "../about_finish/leadershep/Efrain Duran Jesus Generation biography.pdf"
       }
     };
 
@@ -256,6 +264,7 @@
     var delay = 5000;
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    var wide = window.matchMedia("(min-width: 1280px)");
     var startX = 0;
     var pointerId = null;
     var suppressClick = false;
@@ -284,6 +293,15 @@
     }
 
     function show(n, animate) {
+      if (wide.matches) {
+        track.style.transition = "none";
+        track.style.transform = "none";
+        slides.forEach(function (slide) {
+          slide.removeAttribute("aria-hidden");
+          if ("inert" in slide) slide.inert = false;
+        });
+        return;
+      }
       var motion = animate !== false && !reduce;
       if (!motion) track.style.transition = "none";
       index = n;
@@ -357,7 +375,7 @@
     }
 
     function start() {
-      if (timer || reduce || bioOpen() || document.hidden) return;
+      if (wide.matches || timer || reduce || bioOpen() || document.hidden) return;
       if (root.contains(document.activeElement)) return;
       if (finePointer && root.matches(":hover")) return;
       timer = window.setInterval(function () {
@@ -426,6 +444,14 @@
         if (bioOpen()) stop();
         else start();
       }).observe(dialog, { attributes: true, attributeFilter: ["hidden"] });
+    }
+
+    if (wide.addEventListener) {
+      wide.addEventListener("change", function () {
+        show(logical(), false);
+        if (wide.matches) stop();
+        else start();
+      });
     }
 
     show(0, false);

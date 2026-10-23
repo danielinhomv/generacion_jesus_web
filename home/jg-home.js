@@ -117,7 +117,30 @@
       ".jg-global__content > a",
       ".jg-final__content > h2",
       ".jg-final__content > p",
-      ".jg-final__ctas"
+      ".jg-final__ctas",
+      ".jg-gi-card",
+      ".jg-gi-copy > .jg-kicker",
+      ".jg-gi-copy > h2:not(.jg-gi-label)",
+      ".jg-gi-copy > .jg-gi-label",
+      ".jg-gi-copy > p:not(.jg-kicker)",
+      ".jg-gi-copy > .jg-btn",
+      ".jg-gi-needs li",
+      ".jg-gi-band__quote",
+      ".jg-gi-band__copy > h2",
+      ".jg-gi-band__ctas",
+      ".jg-gv-panel",
+      ".jg-gv-impact__head",
+      ".jg-gv-impact article",
+      ".jg-gv-month__copy > *",
+      ".jg-gv-month__cta",
+      ".jg-gv-ways > h2",
+      ".jg-gv-ways > .jg-gv-lead",
+      ".jg-gv-card",
+      ".jg-gv-note",
+      ".jg-gv-close__copy > *",
+      ".jg-pp-promise",
+      ".jg-pp-grid article",
+      ".jg-pp-note"
     ].join(",");
 
     function show(section) {
@@ -125,7 +148,7 @@
       if (!reduce) section.classList.add("is-in");
     }
 
-    var groupSel = ".jg-pillar, .jg-next, .jg-gift, .jg-gifts__note, .jg-matter__group, .jg-harvest, .jg-global__figures, .jg-global__content > a, .jg-final__ctas";
+    var groupSel = ".jg-pillar, .jg-next, .jg-gift, .jg-gifts__note, .jg-matter__group, .jg-harvest, .jg-global__figures, .jg-global__content > a, .jg-final__ctas, .jg-gi-card, .jg-gi-needs li, .jg-gv-card, .jg-gv-impact article, .jg-pp-grid article";
 
     if (!reduce) {
       sections.forEach(function (section) {
