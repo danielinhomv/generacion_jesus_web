@@ -183,23 +183,23 @@
     var pdfs = window.JG_BIO_PDFS || {
       rocky: {
         name: "Rocky J. Malloy",
-        src: "../about_finish/leadershep/2026 Bio Rocky J Malloy June.pdf"
+        src: "https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ad0fbffb3c1e3eb1905d584.pdf"
       },
       stacy: {
         name: "Stacy Valentine",
-        src: "../about_finish/leadershep/Stacy Short Bio 2026.pdf"
+        src: "https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ad0fbffaeb46c40690da5e2.pdf"
       },
       erika: {
         name: "Erika Román Balderrama",
-        src: "../about_finish/leadershep/Biografia Erika Roman 2026.pdf"
+        src: "https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ad0fc02aeb46c40690da646.pdf"
       },
       jose: {
         name: "José Morales",
-        src: "../about_finish/leadershep/Jose Morales - EN.pdf"
+        src: "https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ad0fbfff7b44c381ce73d85.pdf"
       },
       efrain: {
         name: "Efraín Durán",
-        src: "../about_finish/leadershep/Efrain Duran Jesus Generation biography.pdf"
+        src: "https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ad0fc02283355138e75f8eb.pdf"
       }
     };
 
