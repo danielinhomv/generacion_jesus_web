@@ -195,9 +195,9 @@
     if (window.__jgDonateModal) return; /* evita iniciar el modal dos veces si el código está en dos archivos */
     window.__jgDonateModal = true;
 
-    var CONTACT_URL = "https://jesusgeneration.global/contact#message";
+    var CONTACT_URL = "https://link.followdrip.com/preview/xB8RcIiUig3o4jC325Pv?notrack=true#message";
     var FORM_BASE = "https://link.followdrip.com/widget/form/";
-
+    
     /* Una entrada por tarjeta (la clave va en data-jg-donate="..." del botón).
        type: "once" = regalo individual · "monthly" = regalo mensual
        alsoIndividual: en el formulario mensual también se puede cambiar a regalo individual

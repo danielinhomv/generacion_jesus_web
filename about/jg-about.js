@@ -200,6 +200,10 @@
       efrain: {
         name: "Efraín Durán",
         src: "https://assets.cdn.filesafe.space/gs4xUibAAQ1nX0LBXvT7/media/6ad0fc02283355138e75f8eb.pdf"
+      },
+      roberto: {
+        name: "Roberto Carlos Vaca Pinto",
+        src: "https://assets.cdn.filesafe.space/K54982bgk7AGuZjj7MQ5/media/6aea2fe53f72df587aebfbce.pdf"
       }
     };
 

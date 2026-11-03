@@ -2803,3 +2803,15 @@ body.is-bio-open {
   .jg-header.is-open .jg-nav a { justify-self: auto; width: auto; }
 }
 
+.jg-lead-card[data-jg-bio="roberto"] > img {
+  object-position: center top;
+  transform-origin: 50% 57%;
+  scale: 1.28;
+  clip-path: inset(12.5% 10.9% 9.4% 10.9% round 12.5px);
+}
+@media (min-width: 1280px) {
+  .jg-lead-card[data-jg-bio="roberto"] > img {
+    clip-path: inset(12.5% 10.9% 9.4% 10.9%);
+  }
+}
+
