@@ -227,11 +227,15 @@ p { margin: 0 0 0.9rem; }
 
 .jg-hero {
   position: relative;
-  min-height: calc(100vh - var(--jg-header));
+  min-height: clamp(480px, 68vh, 620px);
   display: grid;
   align-items: center;
   color: var(--jg-white);
   overflow: hidden;
+}
+/* Cap hero height on typical laptop viewports (1366×768, 1440×900) */
+@media (min-width: 1025px) and (max-height: 820px) {
+  .jg-hero { min-height: clamp(440px, 60vh, 560px); }
 }
 .jg-hero picture {
   position: absolute;
@@ -366,7 +370,7 @@ p { margin: 0 0 0.9rem; }
   position: relative;
   display: grid;
   gap: 2rem;
-  padding: 3.5rem 0 7.5rem;
+  padding: 3rem 0 4.5rem;
 }
 .jg-village h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); color: var(--jg-navy); }
 .jg-why__panel { padding: 0.25rem 0 0; }
@@ -739,8 +743,9 @@ p { margin: 0 0 0.9rem; }
 .jg-lazy {
   opacity: 0;
   transition: opacity 0.55s ease;
+  background: var(--jg-light); /* prevents white flash while image loads */
 }
-.jg-lazy.is-loaded { opacity: 1; }
+.jg-lazy.is-loaded { opacity: 1; background: transparent; }
 .jg-gift img.jg-lazy,
 .jg-matter img.jg-lazy,
 .jg-harvest img.jg-lazy { background: var(--jg-light); }
@@ -842,8 +847,8 @@ p { margin: 0 0 0.9rem; }
 }
 
 @media (min-width: 1025px) {
-  .jg-matter__band { min-height: 620px; }
-  .jg-matter__copy { padding: 4.5rem 0; }
+  .jg-matter__band { min-height: 460px; }
+  .jg-matter__copy { padding: 3.5rem 0; }
   .jg-matter__copy h2 { font-size: clamp(2.2rem, 2.6vw, 2.9rem); }
   .jg-gifts .jg-wrap { width: calc(100% - 3rem); }
   .jg-gifts__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -864,7 +869,7 @@ p { margin: 0 0 0.9rem; }
     gap: 1.1rem;
     align-items: center;
   }
-  .jg-village { min-height: clamp(680px, 44vw, 920px); }
+  .jg-village { min-height: clamp(480px, 36vw, 650px); }
   .jg-village__photo { object-position: center 62%; }
   .jg-village__shade { background: none; }
   .jg-global__shade {
@@ -1810,4 +1815,18 @@ body.is-dm-open { overflow: hidden; }
     order: 6;
     margin: 1.1rem 1.25rem 1.5rem;
   }
+}
+
+/* =====================================================================
+   ZOOM 110–125% en laptops: el viewport cae entre 1025–1200px.
+   Evita que las secciones se vean desproporcionadas al acercar zoom.
+   ===================================================================== */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .jg-hero          { min-height: clamp(400px, 55vh, 520px); }
+  .jg-village       { min-height: clamp(400px, 32vw, 540px); }
+  .jg-village__grid { padding-bottom: 3rem; }
+  .jg-matter__band  { min-height: 380px; }
+  .jg-matter__copy  { padding: 2.5rem 0; }
+  .jg-global        { min-height: 340px; }
+  .jg-final         { min-height: 280px; }
 }

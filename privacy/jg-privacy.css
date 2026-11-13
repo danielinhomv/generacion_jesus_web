@@ -234,7 +234,7 @@ background: var(--jg-sky);
 transform: scaleX(0);
 transform-origin: left center;
 }
-.jg-nav a[aria-current="page"]::after { transform: scaleX(1); }
+.jg-nav a[aria-current="page"]::after { transform: scaleX(0); }
 .jg-header__actions { display: flex; align-items: center; gap: 0.45rem; }
 .jg-header__actions .jg-btn { padding-inline: 0.85rem; }
 .jg-header__actions .jg-btn[aria-current="page"] {

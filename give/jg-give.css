@@ -381,11 +381,15 @@ p {
 
 .jg-hero {
   position: relative;
-  min-height: calc(100vh - var(--jg-header));
+  min-height: clamp(480px, 68vh, 620px);
   display: grid;
   align-items: center;
   color: var(--jg-white);
   overflow: hidden;
+}
+/* Cap hero height on typical laptop viewports (1366×768, 1440×900) */
+@media (min-width: 1025px) and (max-height: 820px) {
+  .jg-hero { min-height: clamp(440px, 60vh, 560px); }
 }
 
 .jg-hero picture {
@@ -602,7 +606,7 @@ p {
   position: relative;
   display: grid;
   gap: 2rem;
-  padding: 3.5rem 0 7.5rem;
+  padding: 3rem 0 4.5rem;
 }
 
 .jg-village h2 {
@@ -1324,10 +1328,12 @@ p {
 .jg-lazy {
   opacity: 0;
   transition: opacity 0.55s ease;
+  background: var(--jg-light); /* prevents white flash while image loads */
 }
 
 .jg-lazy.is-loaded {
   opacity: 1;
+  background: transparent;
 }
 
 .jg-gift img.jg-lazy,
@@ -1560,11 +1566,11 @@ p {
   }
 
   .jg-matter__band {
-    min-height: 620px;
+    min-height: 460px;
   }
 
   .jg-matter__copy {
-    padding: 4.5rem 0;
+    padding: 3.5rem 0;
   }
 
   .jg-matter__copy h2 {
@@ -1610,7 +1616,7 @@ p {
   }
 
   .jg-village {
-    min-height: clamp(680px, 44vw, 920px);
+    min-height: clamp(480px, 36vw, 650px);
   }
 
   .jg-village__photo {
@@ -1916,7 +1922,7 @@ p {
   position: relative;
   display: grid;
   align-items: end;
-  min-height: 520px;
+  min-height: 400px;
   overflow: hidden;
 }
 
@@ -2236,7 +2242,7 @@ p {
   .jg-gv-close {
     grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
     align-items: stretch;
-    min-height: 640px;
+    min-height: 500px;
   }
 
   .jg-gv-hero .jg-gv-photo,
@@ -2265,7 +2271,7 @@ p {
 
 @media (min-width: 1440px) {
   .jg-gv-hero {
-    min-height: clamp(740px, 72vh, 820px);
+    min-height: clamp(520px, 56vh, 640px);
   }
 
   .jg-gv-hero__copy {
@@ -3524,4 +3530,20 @@ body.is-dm-open {
     order: 6;
     margin: 1.1rem 1.25rem 1.5rem;
   }
+}
+
+/* =====================================================================
+   ZOOM 110–125% en laptops: el viewport cae entre 1025–1200px.
+   ===================================================================== */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .jg-hero              { min-height: clamp(400px, 55vh, 520px); }
+  .jg-gv-hero,
+  .jg-gv-close          { min-height: 420px; }
+  .jg-village           { min-height: clamp(400px, 32vw, 540px); }
+  .jg-village__grid     { padding-bottom: 3rem; }
+  .jg-matter__band      { min-height: 380px; }
+  .jg-matter__copy      { padding: 2.5rem 0; }
+  .jg-global            { min-height: 340px; }
+  .jg-final             { min-height: 280px; }
+  .jg-gv-impact__stage  { min-height: 320px; }
 }
