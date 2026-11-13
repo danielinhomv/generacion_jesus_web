@@ -159,7 +159,7 @@
           <p class="jg-footer__meta">
             <a href="mailto:info@jesusgeneration.global">info@jesusgeneration.global</a>
             <span class="jg-footer__pipe" aria-hidden="true"></span>
-            <a href="https://link.followdrip.com/preview/2kyEQbErRMGK7ElmlKWF?notrack=true">JesusGeneration.global</a>
+            <a href="https://link.followdrip.com/preview/2kyEQbErRMGK7ElmlKWF?notrack=true">www.jesusgeneration.global</a>
           </p>
           <p class="jg-footer__legal">
             <span>© 2026 Jesus Generation. All rights reserved.</span>
@@ -169,7 +169,30 @@
         </div>
       </footer>
     </div>
-    <script src="https://www.jesusgeneration.global//jg-home.js"></script>
+    <script>
+      /* ===== MENÚ MÓVIL (hamburguesa) =====
+         Propio de esta página: no depende de ningún archivo externo. */
+      (function () {
+        "use strict";
+        var header = document.querySelector("[data-jg-header]");
+        if (!header) return;
+        var toggle = header.querySelector("[data-jg-menu-toggle]");
+        if (!toggle) return;
+        header.addEventListener("click", function (e) {
+          var t = e.target.closest ? e.target.closest("[data-jg-menu-toggle]") : null;
+          if (t) {
+            e.stopPropagation();
+            var open = header.classList.toggle("is-open");
+            toggle.setAttribute("aria-expanded", open ? "true" : "false");
+            return;
+          }
+          if (e.target.closest && e.target.closest("a")) {
+            header.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+          }
+        }, true);
+      })();
+    </script>
     <script src="https://link.followdrip.com/js/form_embed.js"></script>
   </body>
 </html>

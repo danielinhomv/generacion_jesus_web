@@ -2815,3 +2815,189 @@ body.is-bio-open {
   }
 }
 
+/* ===== ABOUT: nota de cifras (fecha + qué miden) ===== */
+.jg-stat-note {
+  margin: 1.1rem 0 0;
+  max-width: 32rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.8);
+}
+.jg-stat-note time { font-weight: 600; color: var(--jg-white); }
+
+/* En Global Impact el fondo es claro */
+.jg-impact .jg-stat-note {
+  margin: -0.4rem 0 1.35rem;
+  color: var(--jg-charcoal);
+}
+.jg-impact .jg-stat-note time { color: var(--jg-navy); }
+
+/* ===== ABOUT: Jesus Generation + Fundación Formando Vidas ===== */
+.jg-partner {
+  scroll-margin-top: calc(var(--jg-header) + 0.75rem);
+  padding: clamp(3.2rem, 5vw, 5rem) 0;
+  background: var(--jg-white);
+}
+.jg-partner .jg-wrap { width: min(1280px, calc(100% - 2rem)); }
+
+.jg-partner__head {
+  max-width: 46rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+.jg-partner__head .jg-kicker { color: var(--jg-sky); }
+.jg-partner__head h2 {
+  color: var(--jg-navy);
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+}
+.jg-partner__head h2::after {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 4px;
+  margin: 0.55rem auto 0;
+  border-radius: 2px;
+  background: var(--jg-sky);
+}
+.jg-partner__head p { color: var(--jg-charcoal); }
+.jg-partner__head .jg-partner__lead {
+  margin-top: 1rem;
+  color: var(--jg-navy);
+  font-weight: 600;
+}
+
+/* Las dos organizaciones */
+.jg-partner__orgs {
+  display: grid;
+  gap: 1rem;
+}
+.jg-partner__org {
+  padding: 1.4rem 1.35rem 1.5rem;
+  border-top: 4px solid var(--jg-sky);
+  border-radius: 16px;
+  background: #F1F4F8;
+}
+.jg-partner__role {
+  margin: 0 0 0.35rem;
+  color: var(--jg-royal);
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.jg-partner__org h3 {
+  margin: 0 0 0.6rem;
+  color: var(--jg-navy);
+  font-size: 1.3rem;
+}
+.jg-partner__org p:last-child { margin: 0; color: var(--jg-charcoal); }
+
+.jg-partner__bridge {
+  margin: 1rem 0 0;
+  padding: 1.1rem 1.25rem;
+  border-radius: 14px;
+  background: var(--jg-navy);
+  color: var(--jg-white);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Subtítulos */
+.jg-partner__sub {
+  margin: 2.6rem 0 0.6rem;
+  color: var(--jg-navy);
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  text-align: center;
+}
+.jg-partner__sublead {
+  max-width: 40rem;
+  margin: 0 auto 1.4rem;
+  color: var(--jg-charcoal);
+  text-align: center;
+}
+
+/* Cómo funciona la alianza (5 puntos numerados) */
+.jg-partner__how {
+  counter-reset: jg-partner;
+  list-style: none;
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+}
+.jg-partner__how li {
+  counter-increment: jg-partner;
+  display: flex;
+  gap: 0.85rem;
+  padding: 1.05rem 1.1rem;
+  border-radius: 14px;
+  background: #F1F4F8;
+}
+.jg-partner__how li::before {
+  content: counter(jg-partner);
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 2px solid var(--jg-sky);
+  border-radius: 50%;
+  color: var(--jg-sky);
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--jg-white);
+}
+.jg-partner__how h4 {
+  margin: 0 0 0.2rem;
+  color: var(--jg-navy);
+  font-size: 1rem;
+}
+.jg-partner__how p {
+  margin: 0;
+  color: var(--jg-charcoal);
+  font-size: 0.92rem;
+}
+
+/* Proyectos */
+.jg-partner__projects {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+}
+.jg-partner__projects li {
+  padding: 0.75rem 1rem;
+  border: 1px solid #D7E6F5;
+  border-radius: 999px;
+  color: var(--jg-navy);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.jg-partner__close {
+  max-width: 44rem;
+  margin: 1.8rem auto 0;
+  color: var(--jg-navy);
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (min-width: 720px) {
+  .jg-partner__orgs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+  .jg-partner__how { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jg-partner__projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1025px) {
+  /* 5 puntos: 3 arriba y 2 abajo, alineados al ancho */
+  .jg-partner__how { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .jg-partner__how li { grid-column: span 2; }
+  .jg-partner__how li:nth-child(n+4) { grid-column: span 3; }
+  .jg-partner__projects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+

@@ -1989,3 +1989,640 @@ border-top-color: rgba(255, 255, 255, 0.12);
   .jg-header.is-open .jg-nav { display: flex; gap: 1.1rem; }
   .jg-header.is-open .jg-nav a { justify-self: auto; width: auto; }
 }
+
+/* =========================================================
+   JESUS GENERATION — CONTACT PAGE UI POLISH
+   Additive overrides. Header and footer intentionally untouched.
+   Palette, typography, copy, assets and existing functionality preserved.
+   ========================================================= */
+
+:root {
+  --jg-contact-bg: #F3F6FB;
+  --jg-contact-surface: #FFFFFF;
+  --jg-contact-line: rgba(10, 30, 61, 0.09);
+  --jg-contact-muted: #657187;
+  --jg-contact-shadow: 0 16px 42px rgba(10, 30, 61, 0.075);
+  --jg-contact-shadow-hover: 0 24px 54px rgba(10, 30, 61, 0.13);
+}
+
+/* Shared section rhythm */
+.jg-help,
+.jg-connect,
+.jg-office-prayer {
+  background: var(--jg-contact-bg);
+}
+
+.jg-help {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(3.8rem, 6vw, 5.6rem) 0 clamp(3rem, 5vw, 4.4rem);
+}
+
+.jg-help::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 50%;
+  width: min(900px, 82%);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(13, 71, 161, .16), transparent);
+}
+
+.jg-help h2 {
+  margin-bottom: 0;
+  letter-spacing: -0.035em;
+}
+
+.jg-help h2::after {
+  width: 54px;
+  height: 4px;
+  margin-top: 0.8rem;
+  box-shadow: 0 3px 10px rgba(30, 136, 229, .22);
+}
+
+.jg-help__grid {
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 3.4vw, 2.8rem);
+}
+
+.jg-help-card {
+  min-height: 250px;
+  padding: 1.7rem 1.55rem 1.45rem;
+  border: 1px solid var(--jg-contact-line);
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,1) 0%, rgba(250,252,255,1) 100%);
+  box-shadow: 0 8px 26px rgba(10, 30, 61, .055);
+  overflow: hidden;
+}
+
+.jg-help-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.55rem;
+  right: 1.55rem;
+  height: 3px;
+  border-radius: 0 0 8px 8px;
+  background: linear-gradient(90deg, var(--jg-sky), rgba(30,136,229,.12));
+  opacity: .8;
+}
+
+.jg-help-card__icon {
+  width: 3.7rem;
+  height: 3.7rem;
+  margin-bottom: 1.25rem;
+  background-color: #EAF2FF;
+  box-shadow:
+    inset 0 0 0 1px rgba(13,71,161,.09),
+    0 5px 14px rgba(13,71,161,.055);
+}
+
+.jg-help-card__icon img {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
+.jg-help-card h3 {
+  margin-bottom: .55rem;
+  font-size: 1.08rem;
+  letter-spacing: -.015em;
+}
+
+.jg-help-card p {
+  max-width: 29ch;
+  margin-bottom: 1.35rem;
+  color: #596273;
+  font-size: .94rem;
+  line-height: 1.65;
+}
+
+.jg-help-card a {
+  position: relative;
+  z-index: 1;
+  min-height: 2.45rem;
+  padding: .38rem .42rem .38rem 1rem;
+  background: #EEF3FB;
+  letter-spacing: .075em;
+}
+
+.jg-help-card a img {
+  width: 1.65rem;
+  height: 1.65rem;
+  padding: .43rem;
+}
+
+/* Contact form and information panels */
+.jg-connect {
+  padding: .35rem 0 clamp(3rem, 5vw, 4.6rem);
+}
+
+.jg-connect__grid {
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.jg-panel {
+  position: relative;
+  border: 1px solid rgba(10,30,61,.055);
+  border-radius: 24px;
+  padding: clamp(1.5rem, 3vw, 2.35rem);
+  background: var(--jg-contact-surface);
+  box-shadow: var(--jg-contact-shadow);
+}
+
+.jg-form-card,
+.jg-info-card {
+  overflow: hidden;
+}
+
+.jg-form-card::before,
+.jg-info-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--jg-royal), var(--jg-sky), rgba(30,136,229,.18));
+}
+
+.jg-connect h2 {
+  margin-bottom: .65rem;
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  letter-spacing: -.035em;
+}
+
+.jg-form-card > p,
+.jg-info-card > p {
+  max-width: 56ch;
+  color: var(--jg-contact-muted);
+  font-size: .97rem;
+  line-height: 1.65;
+}
+
+.jg-contact-form {
+  gap: .55rem;
+  margin-top: 1.15rem;
+}
+
+.jg-contact-form label {
+  margin-top: .7rem;
+  font-size: .88rem;
+  font-weight: 700;
+  letter-spacing: .005em;
+}
+
+.jg-contact-form input,
+.jg-contact-form select,
+.jg-contact-form textarea {
+  min-height: 3.05rem;
+  border: 1px solid #DCE4EF;
+  border-radius: 12px;
+  background: #F8FAFD;
+  padding: .82rem 1rem;
+  font-size: .94rem;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.jg-contact-form textarea {
+  min-height: 9rem;
+}
+
+.jg-contact-form input::placeholder,
+.jg-contact-form textarea::placeholder {
+  color: #8993A3;
+}
+
+.jg-contact-form input:focus,
+.jg-contact-form select:focus,
+.jg-contact-form textarea:focus {
+  outline: none;
+  border-color: var(--jg-sky);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(30,136,229,.12);
+}
+
+.jg-contact-form .jg-country__btn {
+  min-height: 3.05rem;
+  border-radius: 12px;
+  background-color: #F8FAFD;
+}
+
+.jg-contact-form .jg-country__btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(30,136,229,.12);
+}
+
+.jg-phone {
+  min-height: 3.05rem;
+  border-radius: 12px;
+  background: #F8FAFD;
+}
+
+.jg-phone:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(30,136,229,.12);
+}
+
+.jg-phone__code {
+  border-radius: 11px 0 0 11px;
+  background: #EAF2FF;
+}
+
+.jg-contact-form .jg-btn {
+  min-height: 3.05rem;
+  margin-top: 1.1rem;
+  padding-inline: 1.55rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(13,71,161,.16);
+}
+
+.jg-contact-form__status {
+  padding: .8rem .95rem;
+  border: 1px solid rgba(30,136,229,.15);
+  border-radius: 12px;
+  background: #F2F7FF;
+}
+
+/* Contact details: consistent rhythm and readable information hierarchy */
+.jg-info-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.jg-info-card > h2 {
+  margin-bottom: .65rem;
+}
+
+.jg-info-card > p {
+  max-width: 34ch;
+}
+
+.jg-info-list {
+  --jg-info-ico: 3.35rem;
+  --jg-info-gap: 1.15rem;
+  margin-top: 1.2rem;
+}
+
+.jg-info-list li {
+  gap: var(--jg-info-gap);
+  padding: 1.35rem 0;
+}
+
+.jg-info-list li::after {
+  left: calc(var(--jg-info-ico) + var(--jg-info-gap));
+  background: linear-gradient(90deg, #D7E1EE, rgba(215,225,238,.35));
+}
+
+.jg-info-list li:last-child::after {
+  left: calc(var(--jg-info-ico) + var(--jg-info-gap));
+}
+
+.jg-info-list .jg-ico {
+  width: var(--jg-info-ico);
+  height: var(--jg-info-ico);
+  background-color: #EAF2FF;
+  box-shadow: inset 0 0 0 1px rgba(13,71,161,.08);
+}
+
+.jg-info-list .jg-ico img {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.jg-info-list strong {
+  margin-bottom: .28rem;
+  font-size: .94rem;
+  letter-spacing: .005em;
+}
+
+.jg-info-list a,
+.jg-info-list li > div > span {
+  margin-top: 0;
+  color: var(--jg-royal);
+  font-size: .96rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.jg-info-list li > div > span {
+  color: #596273;
+}
+
+.jg-info-card .jg-social {
+  justify-content: flex-start;
+  gap: .75rem;
+  margin-top: auto;
+  padding-top: 1.2rem;
+}
+
+.jg-info-card .jg-social a {
+  width: 2.8rem;
+  height: 2.8rem;
+  background: var(--jg-royal);
+  box-shadow: 0 5px 14px rgba(13,71,161,.15);
+}
+
+/* Office and prayer panels */
+.jg-office-prayer {
+  padding: 0 0 clamp(3.5rem, 5vw, 5rem);
+}
+
+.jg-office-prayer__grid {
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.jg-office-prayer .jg-panel {
+  min-height: 340px;
+  padding: clamp(1.5rem, 2.8vw, 2.2rem);
+  border-radius: 24px;
+  box-shadow: var(--jg-contact-shadow);
+}
+
+.jg-office h2,
+.jg-prayer h2 {
+  margin-bottom: .55rem;
+  letter-spacing: -.02em;
+}
+
+.jg-office__map {
+  opacity: .2;
+  filter: saturate(.85);
+}
+
+.jg-office__list {
+  gap: 1rem;
+  margin-top: 1.45rem;
+}
+
+.jg-office__list li {
+  gap: .9rem;
+}
+
+.jg-office__list strong {
+  margin-bottom: .2rem;
+}
+
+.jg-office__list li > div {
+  line-height: 1.5;
+}
+
+.jg-office__dir {
+  margin-top: 1.5rem;
+  min-height: 2.8rem;
+  padding-inline: 1.25rem;
+  border-radius: 999px;
+}
+
+.jg-prayer {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.jg-prayer > p {
+  max-width: 42ch;
+  color: #596273;
+  line-height: 1.65;
+}
+
+.jg-prayer__art {
+  width: min(13rem, 68%);
+  margin: 1.2rem auto 1.25rem;
+  filter: drop-shadow(0 8px 16px rgba(13,71,161,.08));
+}
+
+.jg-prayer .jg-btn {
+  min-height: 2.9rem;
+  padding-inline: 1.5rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(13,71,161,.17);
+}
+
+/* Bottom call-to-action — part of page content, not the footer */
+.jg-final--contact {
+  min-height: 400px;
+}
+
+.jg-final--contact .jg-final__content {
+  max-width: 42rem;
+}
+
+.jg-final--contact .jg-final__content h2 {
+  max-width: 17ch;
+  letter-spacing: -.035em;
+}
+
+.jg-final--contact .jg-final__content > p {
+  line-height: 1.65;
+}
+
+/* Interaction polish */
+@media (hover: hover) and (pointer: fine) {
+  .jg-help-card {
+    transition: transform .28s cubic-bezier(.22,1,.36,1),
+                box-shadow .28s ease,
+                border-color .28s ease;
+  }
+
+  .jg-help-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(30,136,229,.22);
+    box-shadow: var(--jg-contact-shadow-hover);
+  }
+
+  .jg-help-card:hover::before {
+    opacity: 1;
+  }
+
+  .jg-panel {
+    transition: box-shadow .25s ease, transform .25s ease;
+  }
+
+  .jg-connect__grid > .jg-panel:hover,
+  .jg-office-prayer__grid > .jg-panel:hover {
+    box-shadow: 0 20px 48px rgba(10,30,61,.105);
+  }
+
+  .jg-info-list a:hover {
+    color: var(--jg-sky);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .jg-info-card .jg-social a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(13,71,161,.22);
+  }
+}
+
+/* Desktop layout refinement */
+@media (min-width: 720px) {
+  .jg-help__grid {
+    align-items: stretch;
+  }
+
+  .jg-help-card {
+    min-height: 258px;
+  }
+
+  .jg-connect__grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+    gap: 1.5rem;
+  }
+
+  .jg-office-prayer__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+    gap: 1.5rem;
+  }
+
+  .jg-info-list li {
+    padding: 1.45rem 0;
+  }
+}
+
+@media (min-width: 1025px) {
+  .jg-help__grid {
+    gap: 1.35rem;
+  }
+
+  .jg-help-card {
+    min-height: 270px;
+    padding: 1.8rem 1.55rem 1.5rem;
+  }
+
+  .jg-connect__grid {
+    gap: 1.65rem;
+  }
+
+  .jg-panel {
+    padding: 2.25rem;
+  }
+
+  .jg-info-list {
+    margin-top: 1.35rem;
+  }
+
+  .jg-info-list li {
+    padding: 1.65rem 0;
+  }
+
+  .jg-office-prayer__grid {
+    gap: 1.65rem;
+  }
+}
+
+/* Tablet and mobile */
+@media (max-width: 719px) {
+  .jg-help {
+    padding: 3.1rem 0 2.7rem;
+  }
+
+  .jg-help__grid {
+    gap: .9rem;
+    margin-top: 1.7rem;
+  }
+
+  .jg-help-card {
+    min-height: 0;
+    padding: 1.4rem 1.25rem 1.25rem;
+    border-radius: 18px;
+  }
+
+  .jg-help-card::before {
+    left: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .jg-help-card__icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: .95rem;
+  }
+
+  .jg-help-card p {
+    max-width: none;
+  }
+
+  .jg-connect {
+    padding: .2rem 0 2.5rem;
+  }
+
+  .jg-connect__grid,
+  .jg-office-prayer__grid {
+    gap: 1rem;
+  }
+
+  .jg-panel {
+    padding: 1.45rem 1.2rem;
+    border-radius: 19px;
+  }
+
+  .jg-connect h2 {
+    font-size: 1.75rem;
+  }
+
+  .jg-info-list {
+    margin-top: .85rem;
+  }
+
+  .jg-info-list li {
+    padding: 1.1rem 0;
+  }
+
+  .jg-office-prayer {
+    padding-bottom: 3rem;
+  }
+
+  .jg-office-prayer .jg-panel {
+    min-height: 0;
+  }
+
+  .jg-office__dir {
+    align-self: flex-start;
+    margin-top: 1.4rem;
+  }
+
+  .jg-prayer__art {
+    width: min(11.5rem, 62%);
+    margin: 1rem auto;
+  }
+
+  .jg-prayer .jg-btn {
+    margin-top: .5rem;
+  }
+
+  .jg-final--contact {
+    min-height: 330px;
+  }
+}
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .jg-help-card,
+  .jg-panel,
+  .jg-info-card .jg-social a,
+  .jg-contact-form input,
+  .jg-contact-form select,
+  .jg-contact-form textarea {
+    transition: none !important;
+  }
+
+  .jg-help-card:hover,
+  .jg-info-card .jg-social a:hover {
+    transform: none !important;
+  }
+}
+.jg-office__label {
+  display: inline-block;
+  margin-bottom: 0.15rem;
+  color: var(--jg-sky);
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
