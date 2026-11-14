@@ -3021,3 +3021,18 @@ body.is-bio-open {
   .jg-final          { min-height: 280px; }
   .jg-continue       { min-height: 0; }
 }
+
+/* Nota de identidad organizacional (Jesus Generation / Forming Lives / Formando Vidas) */
+.jg-continue__note {
+  margin: 1.1rem 0 0;
+  padding: 0.85rem 1rem 0.85rem 1.1rem;
+  border-left: 3px solid var(--jg-sky);
+  background: rgba(30, 136, 229, 0.05);
+  border-radius: 0 8px 8px 0;
+  color: var(--jg-charcoal);
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+.jg-continue__note strong {
+  color: var(--jg-navy);
+}
