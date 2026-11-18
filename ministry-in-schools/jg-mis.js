@@ -46,22 +46,10 @@
   function bindStats() {
     var nodes = qsa("[data-target]");
     if (!nodes.length) return;
-    if (!("IntersectionObserver" in window)) {
-      nodes.forEach(function (el) {
-        el.textContent = formatStat(Number(el.getAttribute("data-target")), el.getAttribute("data-suffix") || "");
-      });
-      return;
-    }
-    var seen = new WeakSet();
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting || seen.has(entry.target)) return;
-        seen.add(entry.target);
-        animateCount(entry.target);
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.25 });
-    nodes.forEach(function (el) { observer.observe(el); });
+    // SEO improvement: Display static numbers instead of animating from zero
+    nodes.forEach(function (el) {
+      el.textContent = formatStat(Number(el.getAttribute("data-target")), el.getAttribute("data-suffix") || "");
+    });
   }
 
   /* ── Lazy-load images ────────────────────────────────────────────── */
