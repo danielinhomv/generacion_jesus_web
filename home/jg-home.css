@@ -1842,13 +1842,14 @@ body.is-dm-open { overflow: hidden; }
   gap: 0.5rem;
   margin-top: 1.25rem;
   padding: 0.52rem 1.05rem 0.52rem 0.7rem;
+  min-height: 44px;
   border-radius: 999px;
   /* móvil: texto azul oscuro, fondo claro */
   background: rgba(13, 71, 161, 0.08);
   border: 1.5px solid rgba(13, 71, 161, 0.22);
   color: var(--jg-navy);
   font-family: Montserrat, Arial, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-decoration: none;
