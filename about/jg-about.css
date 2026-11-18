@@ -1019,11 +1019,18 @@ p { margin: 0 0 0.9rem; }
 
 @media (min-width: 720px) {
   .jg-footer--social .jg-footer__grid {
-    grid-template-columns: 1.1fr 0.55fr 0.75fr 1.9fr;
+    grid-template-columns: 1.1fr 0.85fr 0.75fr 1.6fr;
     column-gap: 2rem;
   }
   .jg-footer--social .jg-social--footer {
     flex-wrap: nowrap;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 1024px) {
+  .jg-footer--social .jg-footer__grid {
+    grid-template-columns: 1.5fr 0.9fr 0.8fr 1.5fr;
+    column-gap: 1.25rem;
   }
 }
 

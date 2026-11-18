@@ -1098,7 +1098,7 @@ p { margin: 0 0 0.9rem; }
 
 @media (min-width: 720px) {
   .jg-footer--social .jg-footer__grid {
-    grid-template-columns: 1.1fr 0.55fr 0.75fr 1.9fr;
+    grid-template-columns: 1.1fr 0.85fr 0.75fr 1.6fr;
     column-gap: 2rem;
   }
 }
@@ -1106,7 +1106,7 @@ p { margin: 0 0 0.9rem; }
 /* Tablet / laptop pequeña: más espacio para la primera columna */
 @media (min-width: 720px) and (max-width: 1024px) {
   .jg-footer--social .jg-footer__grid {
-    grid-template-columns: 1.5fr 0.6fr 0.8fr 1.8fr;
+    grid-template-columns: 1.5fr 0.9fr 0.8fr 1.5fr;
     column-gap: 1.25rem;
   }
 }
@@ -1829,4 +1829,192 @@ body.is-dm-open { overflow: hidden; }
   .jg-matter__copy  { padding: 2.5rem 0; }
   .jg-global        { min-height: 340px; }
   .jg-final         { min-height: 280px; }
+}
+
+/* =====================================================================
+   "What's New" link — sección .jg-village
+   Base (móvil / fondo claro): azul sobre fondo translúcido.
+   Desktop (≥1025px, fondo fotográfico): blanco sólido para contrastar.
+   ===================================================================== */
+.jg-whats-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 0.52rem 1.05rem 0.52rem 0.7rem;
+  border-radius: 999px;
+  /* móvil: texto azul oscuro, fondo claro */
+  background: rgba(13, 71, 161, 0.08);
+  border: 1.5px solid rgba(13, 71, 161, 0.22);
+  color: var(--jg-navy);
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.22s ease, border-color 0.22s ease,
+              color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.jg-whats-new__dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--jg-sky);
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+  transition: background 0.22s ease, box-shadow 0.22s ease;
+}
+
+.jg-whats-new__label {
+  line-height: 1;
+}
+
+.jg-whats-new__arrow {
+  flex-shrink: 0;
+  color: var(--jg-sky);
+  transition: transform 0.22s ease, color 0.22s ease;
+}
+
+/* ── Desktop: sobre foto de fondo → pill blanco con texto azul navy ── */
+@media (min-width: 1025px) {
+  .jg-whats-new {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: var(--jg-navy);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(10, 30, 61, 0.14);
+  }
+  .jg-whats-new__dot {
+    background: var(--jg-sky);
+    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.18);
+  }
+  .jg-whats-new__arrow {
+    color: var(--jg-sky);
+  }
+}
+
+/* ── Móvil: más espacio encima para separarlo del párrafo ── */
+@media (max-width: 1024px) {
+  .jg-whats-new {
+    margin-top: 1.6rem;
+    /* Separador visual sutil encima del botón */
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+}
+/* ── Hover / focus (puntero fino) ── */
+@media (hover: hover) and (pointer: fine) {
+  .jg-whats-new:hover,
+  .jg-whats-new:focus-visible {
+    background: var(--jg-royal);
+    border-color: var(--jg-royal);
+    color: var(--jg-white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(13, 71, 161, 0.3);
+  }
+  .jg-whats-new:hover .jg-whats-new__dot,
+  .jg-whats-new:focus-visible .jg-whats-new__dot {
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+  .jg-whats-new:hover .jg-whats-new__arrow,
+  .jg-whats-new:focus-visible .jg-whats-new__arrow {
+    color: var(--jg-white);
+    transform: translateX(4px);
+  }
+}
+
+.jg-whats-new:focus-visible {
+  outline: 3px solid var(--jg-sky);
+  outline-offset: 3px;
+}
+
+/* =====================================================================
+   "How does ministry happen in international schools?" — callout card
+   Vive dentro de .jg-matter__copy sobre fondo navy oscuro.
+   ===================================================================== */
+.jg-mis-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+  padding: 0.75rem 1.1rem 0.75rem 0.85rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.88rem;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.4;
+  max-width: 26rem;
+  transition: background 0.25s ease, border-color 0.25s ease,
+              color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Icono de pregunta a la izquierda */
+.jg-mis-link__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(30, 136, 229, 0.22);
+  border: 1px solid rgba(30, 136, 229, 0.35);
+  color: #64B5F6;
+  font-family: Montserrat, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+/* Texto en el centro */
+.jg-mis-link__text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Flecha a la derecha */
+.jg-mis-link__arrow {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #64B5F6;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .jg-mis-link:hover,
+  .jg-mis-link:focus-visible {
+    background: rgba(30, 136, 229, 0.18);
+    border-color: rgba(30, 136, 229, 0.45);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(10, 30, 61, 0.3);
+  }
+  .jg-mis-link:hover .jg-mis-link__icon,
+  .jg-mis-link:focus-visible .jg-mis-link__icon {
+    background: rgba(30, 136, 229, 0.38);
+    border-color: rgba(30, 136, 229, 0.6);
+    color: #fff;
+  }
+  .jg-mis-link:hover .jg-mis-link__arrow,
+  .jg-mis-link:focus-visible .jg-mis-link__arrow {
+    transform: translateX(4px);
+    color: #fff;
+  }
+}
+
+.jg-mis-link:focus-visible {
+  outline: 2px solid var(--jg-sky);
+  outline-offset: 3px;
 }
